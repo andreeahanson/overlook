@@ -45,10 +45,11 @@ describe('CustomerRepo', function() {
     it('should create a new customer', function() {
         expect(customerSampleData.length).to.equal(4);
         customerRepo.addCustomer();
+        expect(customerSampleData.length).to.equal(5); 
         expect(customerSampleData[4]).to.eql({
           id: 7000, 
-          name: "Andreea Hanson",
-          balance: 0});        
+          name: "Andreea Hanson"
+          });    
       })
 
     it('should find a customer by name', function() {

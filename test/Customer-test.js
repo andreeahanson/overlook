@@ -32,13 +32,6 @@ describe('Customer', function() {
       expect(customer.name).to.equal("Milo Ankunding");
     })
 
-    it('should have a name', function() {
-      expect(customer.name).to.equal("Milo Ankunding");
-    })
-
-    it('should have a starting balance of zero', function() {
-      expect(customer.balance).to.equal(0);
-    })
 
     //CALCULATE TOTAL BALANCE OR ADD DIRECTLY TO THE PROPERTY?
     // it('should calculate the total balance of a customer', function() {
