@@ -10,8 +10,8 @@ class CustomerRepo {
         this.customerData.push(customer);
     }
 
-    findCustomerByName(name) {
-        return this.customerData.find(customer => customer.name.toUpperCase() === name.toUpperCase())
+    findCustomerByName(currentName) {
+        return this.customerData.find(customer => customer.name.toUpperCase() === currentName.toUpperCase())
     }
 
     validateCustomer(name){

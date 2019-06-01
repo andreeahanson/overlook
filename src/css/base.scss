@@ -1,6 +1,125 @@
 /* This is an example of using Sass, otherwise plain CSS works too*/
 $primary-background: pink;
 
+@mixin tab-guidelines($tab-height) {
+  height: $tab-height;
+}
+
 body {
   background-color: $primary-background;
+}
+
+.title {
+  color: red;
+}
+
+h1 {
+  margin: 0;
+}
+
+hr {
+  margin:0px;
+}
+
+h2,
+.date {
+  font-size: 15px;
+}
+
+
+section{
+			margin-top: 100px;
+			font-family: 'Trebuchet MS', serif;
+			line-height: 1
+		}
+		.container{
+      background-color: orange;
+      margin: 0;
+      width: 100%;
+      @include tab-guidelines(80vh)
+    }
+
+		ul.tabs{
+			margin: 0px;
+			padding: 0px;
+			list-style: none;
+		}
+		ul.tabs li{
+			background: none;
+			color: #222;
+			display: inline-block;
+			padding: 10px 15px;
+			cursor: pointer;
+		}
+
+		ul.tabs li.current{
+			background: #ededed;
+			color: #222;
+		}
+
+		.tab-content{
+			display: none;
+			background: #ededed;
+      padding: 15px;
+      @include tab-guidelines(80vh)
+		}
+
+		.tab-content.current{
+			display: inherit;
+		}
+
+.align-vertically {
+  background-color: gold;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+}
+
+.align-horizontally {
+  background-color: gold;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+}
+
+.customer-list-ul,
+ul {
+  padding: 0px;
+}
+
+.customer-list {
+  list-style: none;
+}
+
+//ROOM
+.create-booking-form {
+  display: flex;
+  background-color: red;
+  justify-content: space-around;
+  padding: 10px;
+}
+
+.room-booking-list {
+  list-style: none;
+}
+
+.room-booking-list-ul {
+  padding: 0px;
+}
+
+.rooms-by-type {
+  background-color: blue; 
+}
+
+.availability {
+  background-color: aqua;
+}
+
+.availability-ul {
+  padding: 0;
+}
+
+.room-service-menu {
+  background-color: coral;
+
 }

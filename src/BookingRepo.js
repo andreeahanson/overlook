@@ -1,18 +1,20 @@
 import Booking from "./Booking";
+import domUpdates from "./domUpdates"
 
 class BookingRepo {
-  constructor(bookingRepoData, roomData){
-    this.bookingRepoData = bookingRepoData; 
+  constructor(bookingData, roomData){
+    this.bookingData = bookingData; 
     this.roomData = roomData;
-    this.totalRooms = this.roomData.length;
+    this.totalRooms = this.roomData.length; 
   }
 
   calculateOccupiedRoomsByDate(date) {
-    return this.bookingRepoData.filter(room => room.date === date).length
+    return this.bookingData.filter(room => room.date === date).length
   }
 
   calculateAvailableRoomsByDate(date) {
-    return this.totalRooms - this.bookingRepoData.filter(room => room.date === date).length
+    let availableRooms = this.totalRooms - this.bookingData.filter(room => room.date === date).length;
+    domUpdates.displayAvailability(availableRooms)
   }
 
   filterRoomsByType(type) {
@@ -21,16 +23,16 @@ class BookingRepo {
   
   addNewBooking() {
     let booking = new Booking(555, "25/08/2019", 143)
-    this.bookingRepoData.push(booking)
+    this.bookingData.push(booking)
   }
 
   removeBooking(book) {
-    let indexOfBooking = this.bookingRepoData.findIndex(booking => booking.userID === book.userID && booking.date === book.date && booking.roomNumber === book.roomNumber)
-    this.bookingRepoData.splice(indexOfBooking, 1)
+    let indexOfBooking = this.bookingData.findIndex(booking => booking.userID === book.userID && booking.date === book.date && booking.roomNumber === book.roomNumber)
+    this.bookingData.splice(indexOfBooking, 1)
   }
 
   showMostPopularBookingDate() {
-    let dates = this.bookingRepoData.map(book => book.date)
+    let dates = this.bookingData.map(book => book.date)
     let popularDate = dates.reduce((acc, date) => {
       acc[date] = ++ acc[date] || 1
       return acc
@@ -40,7 +42,7 @@ class BookingRepo {
   }
 
   showLeastPopularBookingDate() {
-    let dates = this.bookingRepoData.map(book => book.date)
+    let dates = this.bookingData.map(book => book.date)
     let nonPopularDate = dates.reduce((acc, date) => {
       acc[date] = ++ acc[date] || 1
       return acc
@@ -50,11 +52,11 @@ class BookingRepo {
   } 
   
   showCustomersBookings(customerID) {
-    return this.bookingRepoData.filter(book => book.userID === customerID);
+    return this.bookingData.filter(book => book.userID === customerID);
   }
 
   noDataMessage(customerID) {
-    if (this.bookingRepoData.filter(book => book.userID === customerID).length === 0){
+    if (this.bookingData.filter(book => book.userID === customerID).length === 0){
       return "No data for this customer"
     }
   }
