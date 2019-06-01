@@ -1,8 +1,9 @@
 import domUpdates from "./domUpdates";
 
 class Hotel {
-  constructor() {
+  constructor(bookingRepo) {
     this.currentDate = this.showTodaysDate();
+    this.bookingRepo = bookingRepo;
   }
 
   showTodaysDate() {
@@ -12,6 +13,7 @@ class Hotel {
     let yyyy = today.getFullYear();
     return today = dd + '/' + mm + '/' + yyyy;
 }
+
 
 }
 
