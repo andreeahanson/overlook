@@ -53,10 +53,10 @@ let roomService;
 //     })
 //     .catch(error => console.log(`Error in promises ${error}`))
 $(document).ready(function(){
-let userData;
+let customerData;
 fetch('https://fe-apps.herokuapp.com/api/v1/overlook/1903/users/users')
   .then(dataFile => dataFile.json())
-  .then(dataFile => userData = dataFile.users);
+  .then(dataFile => customerData = dataFile.users);
 
 let roomData;
 fetch('https://fe-apps.herokuapp.com/api/v1/overlook/1903/rooms/rooms')
@@ -90,7 +90,7 @@ fetch('https://fe-apps.herokuapp.com/api/v1/overlook/1903/room-services/roomServ
         domUpdates.showCurrentDate(hotel.currentDate);
         domUpdates.displayAvailability(hotel.bookingRepo.calculateAvailableRoomsByDate(hotel.currentDate))
         domUpdates.displayOccupancy(hotel.bookingRepo.calculateOccupiedRoomsByDate(hotel.currentDate))
-        console.log(hotel)
+        domUpdates.displayRevenueToday(bookingRepo.showTotalRevenueToday(hotel.currentDate))
         
     }
     
