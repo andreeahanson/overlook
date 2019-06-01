@@ -109,6 +109,19 @@ describe('BookingRepo', function() {
       expect(bookingRepo.calculateOccupiedRoomsByDate("07/02/2020")).to.equal(2);
     })
 
+    it('should return the detais of the occupied rooms based on the date', function() {
+      expect(bookingRepo.returnBookingDetailsByDate("07/02/2020")).to.eql([{
+        userID: 61,
+        date: "07/02/2020",
+        roomNumber: 158
+        },
+        {
+        userID: 98,
+        date: "07/02/2020",
+        roomNumber: 159
+        }]);
+    })
+
     it('should calculate the number of available rooms based on the date', function() {
       expect(bookingRepo.calculateAvailableRoomsByDate("07/02/2020")).to.equal(2);
     })
