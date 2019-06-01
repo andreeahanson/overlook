@@ -87,7 +87,8 @@ ul {
   padding: 0px;
 }
 
-.customer-list {
+.customer-list,
+.room-number {
   list-style: none;
 }
 
@@ -121,5 +122,9 @@ ul {
 
 .room-service-menu {
   background-color: coral;
+}
 
+.today-bookings, 
+.today-orders{
+  background-color: coral;
 }

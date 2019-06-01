@@ -20,6 +20,10 @@ class RoomServiceRepo {
     return this.roomServiceData.filter(order => order.date === orderDate)
   }
 
+  displayTotalRoomServiceDetailsPerDate(orderDate) {
+    domUpdates.displayRoomServiceDetailsPerDate(this.returnAllCustomerServiceOrdersForOneDate(orderDate))
+  }
+
   returnTotalAmountSpentOnRoomServicePerDateForOneCustomer(userID, date) {
     let ordersPerDatePerCustomer = this.roomServiceData.filter(order => order.userID === userID && order.date === date)
     return ordersPerDatePerCustomer.reduce((total, order) => {

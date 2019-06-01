@@ -29,7 +29,7 @@ let customer;
 let customerRepo;
 let booking;
 let roomService;
-// let RoomServiceRepo;
+let roomServiceRepo;
 
 
 // let userData = fetch('https://fe-apps.herokuapp.com/api/v1/overlook/1903/users/users').then(function(response){
@@ -68,10 +68,10 @@ fetch('https://fe-apps.herokuapp.com/api/v1/overlook/1903/bookings/bookings')
     .then(dataFile => dataFile.json())
     .then(dataFile => bookingData = dataFile.bookings);
 
-let roomServicesData;
+let roomServiceData;
 fetch('https://fe-apps.herokuapp.com/api/v1/overlook/1903/room-services/roomServices')
     .then(dataFile => dataFile.json())
-    .then(dataFile => roomServicesData = dataFile.roomServices);
+    .then(dataFile => roomServiceData = dataFile.roomServices);
 
     
     function timer() {
@@ -87,11 +87,16 @@ fetch('https://fe-apps.herokuapp.com/api/v1/overlook/1903/room-services/roomServ
         })
         bookingRepo = new BookingRepo (bookingData, roomData)
         hotel = new Hotel(bookingRepo);
+        customerRepo = new CustomerRepo (customerData);
+        // customer = new Customer (id, name)
+        roomServiceRepo = new RoomServiceRepo (roomServiceData, customer)
         domUpdates.showCurrentDate(hotel.currentDate);
         domUpdates.displayAvailability(hotel.bookingRepo.calculateAvailableRoomsByDate(hotel.currentDate))
-        domUpdates.displayOccupancy(hotel.bookingRepo.calculateOccupiedRoomsByDate(hotel.currentDate))
-        domUpdates.displayRevenueToday(bookingRepo.showTotalRevenueToday(hotel.currentDate))
-        
+        domUpdates.displayOccupancy(hotel.bookingRepo.calculateNumberOfOccupiedRoomsByDate(hotel.currentDate))
+        domUpdates.displayRevenueToday(bookingRepo.showTotalBookingRevenueToday(hotel.currentDate))
+        domUpdates.displayBookingDetailsPerDate(bookingRepo.returnBookingDetailsByDate(hotel.currentDate))
+        domUpdates.displayRoomServiceDetailsPerDate(roomServiceRepo.returnAllCustomerServiceOrdersForOneDate(hotel.currentDate))
+
     }
     
     setTimeout(timer, 500);

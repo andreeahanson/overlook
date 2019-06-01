@@ -8,8 +8,16 @@ class BookingRepo {
     this.totalRooms = this.roomData.length; 
   }
 
-  calculateOccupiedRoomsByDate(date) {
+  calculateNumberOfOccupiedRoomsByDate(date) {
     return this.bookingData.filter(room => room.date === date).length
+  }
+
+  returnBookingDetailsByDate(date) {
+    return this.bookingData.filter(room => room.date === date)
+  }
+
+  displayBookedRooms() {
+    domUpdates.displayBookingDetailsPerDate(this.returnBookingDetailsByDate(date))
   }
 
   calculateAvailableRoomsByDate(date) {
@@ -61,7 +69,7 @@ class BookingRepo {
     }
   }
 
-  showTotalRevenueToday(date) {
+  showTotalBookingRevenueToday(date) {
     let bookingCash = this.bookingData.reduce((acc, booking) => {
       this.roomData.forEach(room => {
         if(booking.date === date && room.number === booking.roomNumber) {
