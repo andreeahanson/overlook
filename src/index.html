@@ -1,12 +1,156 @@
 <!DOCTYPE html>
 <html lang="en-US">
   <head>
-    <title>Webpack Starter Kit</title>
+    <title>Overlook - Andreea Hanson 1903 - Mod 2 Individual Project</title>
   </head>
   <body>
-    <h1>Webpack Starter Kit</h1>
+    <header>
+    <h1>Over<span class='title'>Look</span></h1>
+    <hr>
+    <div class="align-horizontally to-date">
+    <h2 class="date">00/00/0000</h2>
+    <h2 class="selected-customer">Selected Customer</h2>
+    </div>
+  </header>
+  <main>
+    <section class="container">
+      
+      <ul class="tabs">
+        <li class="tab-link current" data-tab="tab-1">Main</li>
+        <li class="tab-link" data-tab="tab-2">Orders</li>
+        <li class="tab-link" data-tab="tab-3">Room</li>
+        <li class="tab-link" data-tab="tab-4">Customer</li>
+      </ul>
+      
+      <div id="tab-1" class="tab-content current">
+          <h2>Total available rooms today: <span class="available-rooms">#</span></h2>
+          <h2>Total revenue today: <span class="total-revenue-today">#</span>$</h2>
+          <h2>Occupation rate today: <span class="occupation-rate"></span>%</h2>
+      </div>
+      <div id="tab-2" class="tab-content">
+        <h2>Date: <span class="room-service-amount">100</span>$</h2>
+        <h2>Date: <span class="room-service-amount">100</span>$</h2>
+        <h2>Date: <span class="room-service-amount">100</span>$</h2>
+        <h2>Overall: <span class="room-service-overall-amount">300</span>$</h2>
+        <h2>No information for this customer</h2>
+        <h2>Today's orders <span class="today-orders">order1</span></h2>
+        <form>
+          <input type="text" placeholder="search-orders-by-date">
+          <button>Search</button>
+        </form>
+      </div>
+      <div id="tab-3" class="tab-content">
+        <div class="align-horizontally">
+          <h2>Top booking date: <span class="top-booking-date">#</span></h2>
+          <h2>Bottom booking date: <span class="bottom-booking-date">#</span></h2>
+        </div>
+        <form>
+          <input type="text" placeholder="Search by date">
+          <button>Search rooms by date</button>
+        </form>
+        <form class="generate-booking-room-form">
+          <input type="text" placeholder="booking date" for="booking-date">
+          <input type="text" placeholder="room number" for="room-number">
+          <button>Create Booking</button>
+        </form>
 
-    <img src="/images/turing-logo.png" alt="turing logo" height="100px" width="100px">
+        <div class="rooms-by-type align-horizontally">
+            <h2>Filter Rooms By Type</h2>
+            <select name="room-type" id="room-type-list">
+              <option value="single-room">Single Room</option>
+              <option value="junior-suite">Junior Sweet</option>
+              <option value="suite">Suite</option>
+              <option value="residential-suite"> Residential Suite</option>
+            </select>
+        </div>
+        
+        <div class="availability">
+          <ul class="availability-ul">Availability
+            <div class="align-horizontally">
+              <p>Room</p> 
+              <p>Type</p> 
+              <p>Beds#</p>
+              <p>Bed Size</p>
+              <p>Bidet</p>
+              <p>Price</p>
+            </div>
+            <li class="align-horizontally">
+              <p><span class="room-number-display">103</span> 
+              <p><span class="room-type-display">Single</span></p>
+              <p><span class="number-of-beds-display">2</span></p> 
+              <p><span class="bed-type-display">Queen</span></p>  
+              <p><span class="bidet-display">Yes</span></p> 
+              <p><span class="room-price-display">300</span>$</p>
+            </li>
+            <li class="align-horizontally">
+              <p><span class="room-number-display">103</span> 
+              <p><span class="room-type-display">Single</span></p>
+              <p><span class="number-of-beds-display">2</span></p> 
+              <p><span class="bed-type-display">Queen</span></p>  
+              <p><span class="bidet-display">Yes</span></p> 
+              <p><span class="room-price-display">300</span>$</p>
+            </li>
+          </ul>
+        </div>
+
+        <h2>Created booking</h2>
+        <div class="align-horizontally">
+            <h2>Room Date</h2>
+            <h2>Booking</h2>
+        </div>
+        <ul class="room-booking-list-ul">
+          <li class="align-horizontally">
+            <p class="room-booking-list room-date">##/##/####</p>
+            <p class="room-booking-list room-booking">############</p>
+          </li>
+        </ul>
+
+        <div class="room-service-menu">
+          <button>Order Room Service</button>
+          <h2>Menu</h2>
+          <ul>
+            <li class="align-horizontally">
+              <p>Concrete sandwich</p>
+              <p><span class="room-service-price"></span>$</p>
+            </li>
+            <li class="align-horizontally">
+              <p>Wooden sandwich</p>
+              <p><span class="room-service-price"></span>$</p>
+            </li>
+          </ul>
+        </div>
+
+      </div>
+      <div id="tab-4" class="tab-content">
+        <form for="search-customer">
+          <input type="text" placeholder="Search Customer">
+          <button>Search</button>
+        </form>
+        <form for="add-customer">
+          <input type="list" placeholder="first_name last_name">
+          <button>Add customer</button>
+        </form>
+        <div class="align-horizontally">
+          <div class="align-vertically">
+            <h2>Date</h2>
+            <ul class="customer-list-ul">
+              <li class="customer-list customer-date">##/##/####</li>
+            </ul>
+          </div>
+          <div class="align-vertically">
+          <h2>Booking: </h2>
+          <ul class="customer-list-ul">
+            <li class="customer-list customer-booking">############</li>
+          </ul>
+          </div>
+        </div>
+      </div>
+      <h2>No information for this customer</h2>
+      </div>
+          
+    </section>
+    </main>
+    <!-- <img src="/images/turing-logo.png" alt="turing logo" height="100px" width="100px"> -->
 
     <!-- Do not include the index.js or main.bundle.js file here - it is done automatically by the webpack server -->
   </body>
