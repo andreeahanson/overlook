@@ -25,8 +25,8 @@ import domUpdates from './domUpdates';
 
 let bookingRepo;
 let hotel;
-let customer;
 let customerRepo;
+let customer;
 let booking;
 let roomService;
 let roomServiceRepo;
@@ -87,7 +87,7 @@ fetch('https://fe-apps.herokuapp.com/api/v1/overlook/1903/room-services/roomServ
         })
         bookingRepo = new BookingRepo (bookingData, roomData)
         hotel = new Hotel(bookingRepo);
-        customerRepo = new CustomerRepo (customerData);
+        customerRepo = new CustomerRepo (customerData, bookingData);
         // customer = new Customer (id, name)
         roomServiceRepo = new RoomServiceRepo (roomServiceData, customer)
         domUpdates.showCurrentDate(hotel.currentDate);
@@ -96,6 +96,46 @@ fetch('https://fe-apps.herokuapp.com/api/v1/overlook/1903/room-services/roomServ
         domUpdates.displayRevenueToday(bookingRepo.showTotalBookingRevenueToday(hotel.currentDate))
         domUpdates.displayBookingDetailsPerDate(bookingRepo.returnBookingDetailsByDate(hotel.currentDate))
         domUpdates.displayRoomServiceDetailsPerDate(roomServiceRepo.returnAllCustomerServiceOrdersForOneDate(hotel.currentDate))
+
+        $(".guest-search-button").on('click', searchGuest);
+        $(".guest-search-button").on('submit', searchGuest);
+        $('.add-customer-button').on('click', addGuest);
+        $('.add-customer-button').on('submit', addGuest);
+        
+        function searchGuest(e) {
+            e.preventDefault()
+            let inputValue = $(".guest-search-input").val()
+            let obj = customerRepo.findCustomerByName(inputValue)
+            if(!obj) {
+              domUpdates.displayErrorMsg()
+            } else {
+            customer = new Customer(obj.id, obj.name)
+            console.log(customer)
+            domUpdates.displayName(obj)
+            domUpdates.displayAllOnesCustomerBookings(customerRepo.findOneCustomersBookings(obj.name))
+            // domUpdates.displayGuestBookings(customer)
+            }
+            $(".guest-search-input").val('')
+          }
+
+        function addGuest(e) {
+            e.preventDefault()
+            let inputValue = $(".add-customer-input").val()
+            customer = new Customer(Date.now(), inputValue)
+            customerData.push(customer);
+            console.log(customerData.length)
+            domUpdates.displayNewName(customer)
+            $(".add-customer-input").val('')
+          }
+        
+
+
+
+
+
+
+
+
 
     }
     

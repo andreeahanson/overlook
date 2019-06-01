@@ -27,11 +27,54 @@ const customerSampleData = [
     name: "Milo Ankunding"
     }];
 
+    const bookingRepoSampleData = [
+      {
+      userID: 78,
+      date: "21/08/2019",
+      roomNumber: 143
+      },
+      {
+      userID: 43,
+      date: "05/10/2019",
+      roomNumber: 108
+      },
+      {
+      userID: 5,
+      date: "31/08/2019",
+      roomNumber: 8
+      },
+      {
+      userID: 14,
+      date: "17/07/2019",
+      roomNumber: 192
+      },
+      {
+      userID: 3,
+      date: "15/01/2020",
+      roomNumber: 118
+      },
+      {
+      userID: 61,
+      date: "07/02/2020",
+      roomNumber: 158
+      },
+      {
+        userID: 83,
+        date: "19/01/2020",
+        roomNumber: 120
+        },
+    
+      {
+      userID: 98,
+      date: "07/02/2020",
+      roomNumber: 159
+      }]
+
 describe('CustomerRepo', function() {
     let customerRepo;
 
   beforeEach(function() {
-    customerRepo = new CustomerRepo(customerSampleData);
+    customerRepo = new CustomerRepo(customerSampleData, bookingRepoSampleData);
   });
 
     it('should be a function', function() {
@@ -62,5 +105,9 @@ describe('CustomerRepo', function() {
     it('should validate a customer', function() {
       expect(customerRepo.validateCustomer("Johny Bravo")).to.equal(false);
     })
+
+    it('should find all bookings one customer has made', function() {
+      expect(customerRepo.findOneCustomersBookings("Anya Upton")).to.eql([{userID: 3, date: "15/01/2020", roomNumber: 118}])
+  })
 
 });
