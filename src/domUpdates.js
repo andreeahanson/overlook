@@ -37,6 +37,22 @@ displayRoomServiceDetailsPerDate(roomService) {
     totalCost: 9.48
     })
   roomService.forEach(order => $('.today-orders').append(`<li class="room-number">Item: ${order.food}, Price: ${order.totalCost}</li>`))
+},
+
+displayErrorMsg() {
+  alert('No guest by that name')
+},
+
+displayName(name) {
+  $('.selected-customer').html(name.name)
+},
+
+displayAllOnesCustomerBookings(allBookings) {
+  allBookings.forEach(booking => $('.customer-list-ul').append(`<li class="customer-list customer-date">${booking.date} <span class="booking-room-number">Room: ${booking.roomNumber}</span></li>`))
+},
+
+displayNewName(name) {
+  $('.selected-customer').html(name.name)
 }
 
 
@@ -46,16 +62,16 @@ displayRoomServiceDetailsPerDate(roomService) {
  //MAIN
   //Display today's date - DONE
   //Display today's bookings - DONE
-  //Display today's total rooms occupied - DONE
+  //Display today's total PERCENTAGE rooms occupied
   //Display today's room service orders -DONE
  //Display today's rooms avaiable - DONE
 
   //CUSTOMER
 
-  //Display customer name once selected - 
-  //Search input for customer by name - 
-  //button to search and make enter work
-  //input to create a new customer 
+  //Display customer name once selected - DONE
+  //Search input for customer by name - DONE
+  //button to search and make enter work - DONE
+  //input to create a new customer - DONE
   //Update all tabs to include info for that user
 
   //ROOMS

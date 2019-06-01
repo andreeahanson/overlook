@@ -106,7 +106,7 @@ describe('BookingRepo', function() {
     })
     
     it('should calculate the number of occupied rooms based on the date', function() {
-      expect(bookingRepo.calculateOccupiedRoomsByDate("07/02/2020")).to.equal(2);
+      expect(bookingRepo.calculateNumberOfOccupiedRoomsByDate("07/02/2020")).to.equal(2);
     })
 
     it('should return the detais of the occupied rooms based on the date', function() {
