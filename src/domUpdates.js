@@ -14,6 +14,10 @@ displayAvailability(availability) {
 
 displayOccupancy(occupancy) {
   $('.occupation-rate').html(occupancy)
+}, 
+
+displayRevenueToday(revenue) {
+  $('.total-revenue-today').html(revenue)
 }
 
 

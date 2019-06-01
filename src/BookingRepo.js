@@ -61,6 +61,18 @@ class BookingRepo {
     }
   }
 
+  showTotalRevenueToday(date) {
+    let bookingCash = this.bookingData.reduce((acc, booking) => {
+      this.roomData.forEach(room => {
+        if(booking.date === date && room.number === booking.roomNumber) {
+          acc += room.costPerNight
+        }
+      })
+      return acc
+    }, 0)
+    return bookingCash;
+  } 
+
 }
 
 export default BookingRepo;
