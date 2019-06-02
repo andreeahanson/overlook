@@ -198,7 +198,7 @@ fetch('https://fe-apps.herokuapp.com/api/v1/overlook/1903/room-services/roomServ
                     console.log(bookingRepo.returnAvailableRooms(hotel.currentDate).length)
                     domUpdates.displayAvailability(bookingRepo.returnAvailableRooms(hotel.currentDate).length)
                     let name = $('.selected-customer').html();
-                    domUpdates.displayNewBooking(name, booking)
+                    domUpdates.displayAllOnesCustomerBookings(customerRepo.findOneCustomersBookings(customer.name))
                 }
           }
 
