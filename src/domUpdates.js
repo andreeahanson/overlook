@@ -43,6 +43,7 @@ displayNoBookingsMessage() {
 },
 
 displayAllOnesCustomerBookings(allBookings) {
+  $('.customer-list-ul').html('')
   $('.one-customers-bookings').removeClass('hidden')
   $('.individual-customers-bookings').html('Here are this customer\'s bookings')
   allBookings.forEach(booking => $('.customer-list-ul').append(`<li class="customer-list customer-date">${booking.date} <span class="booking-room-number">Room: ${booking.roomNumber}</span></li>`))
@@ -121,27 +122,27 @@ appendRemainingRoomsAfterFilter(rooms) {
   <p><button id="book-btn-today">Book Room</button></p>
 </li>`)  
 })
-}, 
-
-displayNewBooking(name, booking) {
-  console.log("Name", name)
-  console.log("Booking", booking)
-  $('.room-booking-list-ul').append(`<li class="align-horizontally">
-  <p class="room-booking-list room-date">${name}</p>
-  <p class="room-booking-list room-date">${booking.date}</p>
-  <p class="room-booking-list room-booking">${booking.roomNumber}</p>
-  <div class="room-service-menu">
-      <button>Order Room Service</button>
-      <h2 class="room-service-menu">Menu</h2>
-      <ul>
-        <!-- <li class="align-horizontally">
-          <p>Concrete sandwich</p>
-          <p><span class="room-service-price"></span>$</p>
-        </li> -->
-      </ul>
-    </div>
-</li>`)
 }
+
+// displayNewBooking(name, booking) {
+//   console.log("Name", name)
+//   console.log("Booking", booking)
+//   $('.room-booking-list-ul').append(`<li class="align-horizontally">
+//   <p class="room-booking-list room-date">${name}</p>
+//   <p class="room-booking-list room-date">${booking.date}</p>
+//   <p class="room-booking-list room-booking">${booking.roomNumber}</p>
+//   <div class="room-service-menu">
+//       <button>Order Room Service</button>
+//       <h2 class="room-service-menu">Menu</h2>
+//       <ul>
+//         <!-- <li class="align-horizontally">
+//           <p>Concrete sandwich</p>
+//           <p><span class="room-service-price"></span>$</p>
+//         </li> -->
+//       </ul>
+//     </div>
+// </li>`)
+// }
 
 
  //MAIN
@@ -166,9 +167,9 @@ displayNewBooking(name, booking) {
 
   //ROOMS BY CUSTOMER
 //Display summary of all past and current bookings -DONE
-//Book a room button
-//Drop down menu with all available room types
-//if not available display room types that are available
+//Book a room button- DONE
+//Drop down menu with all available room types -DONE
+//if not available display room types that are available - DONE
 //Once booked - Order room service button
 
 // ORDERS
