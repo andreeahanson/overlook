@@ -47,15 +47,42 @@ displayName(name) {
   $('.selected-customer').html(name.name)
 },
 
+displayNoBookingsMessage() {
+  $('.individual-customers-bookings').html('No bookings for this customer yet.')
+  $('.customer-list-ul').html('')
+},
+
 displayAllOnesCustomerBookings(allBookings) {
+  $('.individual-customers-bookings').html('Here are this customer\'s bookings')
   allBookings.forEach(booking => $('.customer-list-ul').append(`<li class="customer-list customer-date">${booking.date} <span class="booking-room-number">Room: ${booking.roomNumber}</span></li>`))
 },
 
 displayNewName(name) {
   $('.selected-customer').html(name.name)
-}
+},
 
+displayHotelsMostPopularDate(bestDate){
+  $('.top-booking-date').html(bestDate)
+},
 
+displayHotelsLeastPopularDate(worstDate) {
+  $('.bottom-booking-date').html(worstDate)
+},
+
+displayDateErrorMsg() {
+  alert('Please enter a valid date!')
+},
+
+displayAvailableRoomsByDate(rooms) {
+  rooms.forEach(room => $('.availability-ul').append(`<li class="align-horizontally">
+  <p><span class="room-number-display">${room.number}</span> 
+  <p><span class="room-type-display">${room.roomType}</span></p>
+  <p><span class="number-of-beds-display">${room.numBeds}</span></p> 
+  <p><span class="bed-size-display">${room.bedSize}</span></p>  
+  <p><span class="bidet-display">${room.bidet}</span></p> 
+  <p><span class="room-price-display">${room.costPerNight}</span>$</p>
+</li>`))
+  
 }
 
 
@@ -76,11 +103,11 @@ displayNewName(name) {
 
   //ROOMS
   //GENERAL
-  //Display Most popular booking date
-  //Display date with most rooms available
+  //Display Most popular booking date - DONE
+  //Display date with most rooms available - DONE
 
   //ROOMS BY CUSTOMER
-//Display summary of all past and current bookings
+//Display summary of all past and current bookings -DONE
 //Book a room button
 //Drop down menu with all available room types
 //if not available display room types that are available
@@ -96,6 +123,6 @@ displayNewName(name) {
 //total spent for all days
 //error if no orders found
 
-
+}
 
 export default domUpdates;

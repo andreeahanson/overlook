@@ -108,20 +108,49 @@ ul {
   padding: 0px;
 }
 
+.room-booking-head {
+  justify-content: flex-start;
+}
+
+.room-booking-head h2 {
+  margin-left: 80px;  
+}
+
 .rooms-by-type {
   background-color: blue; 
 }
 
 .availability {
   background-color: aqua;
+  display: inline-flex;
+  justify-content: center;
+  width: 100%;
 }
 
 .availability-ul {
   padding: 0;
+  width: 60%;
+  line-height: 0.3;
+  overflow: scroll;
+  max-height: 150px;
+  height: 150px;
+  margin-left: 20px;
+}
+
+.availability li {
+  font-size: 12px;
+}
+
+.availability-form {
+  align-self: center;
+  display: flex;
+  height: 40px;
+  justify-content: center;
 }
 
 .room-service-menu {
   background-color: coral;
+  width: 200px;
 }
 
 .today-bookings, 
