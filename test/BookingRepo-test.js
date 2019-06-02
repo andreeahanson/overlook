@@ -28,7 +28,7 @@ const bookingRepoSampleData = [
   {
   userID: 14,
   date: "17/07/2019",
-  roomNumber: 192
+  roomNumber: 4
   },
   {
   userID: 83,
@@ -107,6 +107,33 @@ describe('BookingRepo', function() {
     
     it('should calculate the number of occupied rooms based on the date', function() {
       expect(bookingRepo.calculateNumberOfOccupiedRoomsByDate("07/02/2020")).to.equal(2);
+    })
+
+    it('should return the available rooms based on the date', function() {
+      expect(bookingRepo.returnAvailableRooms("17/07/2019")).to.eql([{
+        number: 1,
+        roomType: "residential suite",
+        bidet: false,
+        bedSize: "twin",
+        numBeds: 2,
+        costPerNight: 344.58
+        },
+        {
+        number: 2,
+        roomType: "single room",
+        bidet: true,
+        bedSize: "twin",
+        numBeds: 2,
+        costPerNight: 462.7
+        },
+        {
+        number: 3,
+        roomType: "single room",
+        bidet: false,
+        bedSize: "queen",
+        numBeds: 1,
+        costPerNight: 344.89
+        }]);
     })
 
     it('should return the detais of the occupied rooms based on the date', function() {

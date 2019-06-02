@@ -96,11 +96,16 @@ fetch('https://fe-apps.herokuapp.com/api/v1/overlook/1903/room-services/roomServ
         domUpdates.displayRevenueToday(bookingRepo.showTotalBookingRevenueToday(hotel.currentDate))
         domUpdates.displayBookingDetailsPerDate(bookingRepo.returnBookingDetailsByDate(hotel.currentDate))
         domUpdates.displayRoomServiceDetailsPerDate(roomServiceRepo.returnAllCustomerServiceOrdersForOneDate(hotel.currentDate))
+        domUpdates.displayHotelsMostPopularDate(bookingRepo.showMostPopularBookingDate());
+        domUpdates.displayHotelsLeastPopularDate(bookingRepo.showLeastPopularBookingDate());
+        
 
         $(".guest-search-button").on('click', searchGuest);
         $(".guest-search-button").on('submit', searchGuest);
         $('.add-customer-button').on('click', addGuest);
         $('.add-customer-button').on('submit', addGuest);
+        $('.search-rooms-by-date-btn').on('click', searchAvailableRooms);
+        $('.search-rooms-by-date-btn').on('submit', searchAvailableRooms);
         
         function searchGuest(e) {
             e.preventDefault()
@@ -112,8 +117,11 @@ fetch('https://fe-apps.herokuapp.com/api/v1/overlook/1903/room-services/roomServ
             customer = new Customer(obj.id, obj.name)
             console.log(customer)
             domUpdates.displayName(obj)
-            domUpdates.displayAllOnesCustomerBookings(customerRepo.findOneCustomersBookings(obj.name))
-            // domUpdates.displayGuestBookings(customer)
+            if (customerRepo.findOneCustomersBookings(obj.name).length === 0) {
+                domUpdates.displayNoBookingsMessage();
+            } else {
+                domUpdates.displayAllOnesCustomerBookings(customerRepo.findOneCustomersBookings(obj.name))
+            }
             }
             $(".guest-search-input").val('')
           }
@@ -123,13 +131,26 @@ fetch('https://fe-apps.herokuapp.com/api/v1/overlook/1903/room-services/roomServ
             let inputValue = $(".add-customer-input").val()
             customer = new Customer(Date.now(), inputValue)
             customerData.push(customer);
-            console.log(customerData.length)
             domUpdates.displayNewName(customer)
+            if (customerRepo.findOneCustomersBookings(customer.name).length === 0) {
+                domUpdates.displayNoBookingsMessage();
+            } else {
+                domUpdates.displayAllOnesCustomerBookings(customerRepo.findOneCustomersBookings(customer.name))
+            }
             $(".add-customer-input").val('')
           }
         
-
-
+        function searchAvailableRooms(e) {
+            e.preventDefault()
+            let inputValue = $(".search-date-input").val()
+            let objs = bookingRepo.returnAvailableRooms(inputValue)
+            if(!inputValue) {
+              domUpdates.displayDateErrorMsg()
+            } else {
+            domUpdates.displayAvailableRoomsByDate(bookingRepo.returnAvailableRooms(inputValue))
+            }
+            $(".search-date-input").val('')
+          }
 
 
 

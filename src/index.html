@@ -50,14 +50,39 @@
         </form>
       </div>
       <div id="tab-3" class="tab-content">
+          <div class="align-horizontally">
+              <div class="align-vertically">
+                <h2 class="individual-customers-bookings">Date & Room</h2>
+                <ul class="customer-list-ul">
+    
+                </ul>
+              </div>
+            </div>
+            <br>
         <div class="align-horizontally">
           <h2>Top booking date: <span class="top-booking-date">#</span></h2>
           <h2>Bottom booking date: <span class="bottom-booking-date">#</span></h2>
         </div>
-        <form>
-          <input type="text" placeholder="Search by date">
-          <button>Search rooms by date</button>
-        </form>
+        <h2>Search available rooms by date</h2>
+       
+        <div class="availability">
+            <form class="availability-form">
+              <input type="text" placeholder="dd/mm/yyyy" class="search-date-input">
+              <button class="search-rooms-by-date-btn">Search rooms by date</button>
+            </form>
+            <ul class="availability-ul">
+              <div class="align-horizontally">
+                <p>Room</p> 
+                <p>Type</p> 
+                <p>Beds#</p>
+                <p>Bed Size</p>
+                <p>Bidet</p>
+                <p>Price</p>
+              </div>
+              
+            </ul>
+          </div>
+        <h2>Book a room</h2>
         <form class="generate-booking-room-form">
           <input type="text" placeholder="booking date" for="booking-date">
           <input type="text" placeholder="room number" for="room-number">
@@ -74,37 +99,8 @@
             </select>
         </div>
         
-        <div class="availability">
-          <ul class="availability-ul">Availability
-            <div class="align-horizontally">
-              <p>Room</p> 
-              <p>Type</p> 
-              <p>Beds#</p>
-              <p>Bed Size</p>
-              <p>Bidet</p>
-              <p>Price</p>
-            </div>
-            <li class="align-horizontally">
-              <p><span class="room-number-display">103</span> 
-              <p><span class="room-type-display">Single</span></p>
-              <p><span class="number-of-beds-display">2</span></p> 
-              <p><span class="bed-type-display">Queen</span></p>  
-              <p><span class="bidet-display">Yes</span></p> 
-              <p><span class="room-price-display">300</span>$</p>
-            </li>
-            <li class="align-horizontally">
-              <p><span class="room-number-display">103</span> 
-              <p><span class="room-type-display">Single</span></p>
-              <p><span class="number-of-beds-display">2</span></p> 
-              <p><span class="bed-type-display">Queen</span></p>  
-              <p><span class="bidet-display">Yes</span></p> 
-              <p><span class="room-price-display">300</span>$</p>
-            </li>
-          </ul>
-        </div>
-
         <h2>Created booking</h2>
-        <div class="align-horizontally">
+        <div class="align-horizontally room-booking-head">
             <h2>Room Date</h2>
             <h2>Booking</h2>
         </div>
@@ -112,23 +108,20 @@
           <li class="align-horizontally">
             <p class="room-booking-list room-date">##/##/####</p>
             <p class="room-booking-list room-booking">############</p>
+            <div class="room-service-menu">
+                <button>Order Room Service</button>
+                <h2>Menu</h2>
+                <ul>
+                  <!-- <li class="align-horizontally">
+                    <p>Concrete sandwich</p>
+                    <p><span class="room-service-price"></span>$</p>
+                  </li> -->
+                </ul>
+              </div>
           </li>
         </ul>
 
-        <div class="room-service-menu">
-          <button>Order Room Service</button>
-          <h2>Menu</h2>
-          <ul>
-            <li class="align-horizontally">
-              <p>Concrete sandwich</p>
-              <p><span class="room-service-price"></span>$</p>
-            </li>
-            <li class="align-horizontally">
-              <p>Wooden sandwich</p>
-              <p><span class="room-service-price"></span>$</p>
-            </li>
-          </ul>
-        </div>
+
 
       </div>
       <div id="tab-4" class="tab-content">
@@ -142,16 +135,8 @@
           <input type="list" placeholder="first_name last_name" class="add-customer-input">
           <button class="add-customer-button">Add customer</button>
         </form>
-        <div class="align-horizontally">
-          <div class="align-vertically">
-            <h2>Date & Room</h2>
-            <ul class="customer-list-ul">
-
-            </ul>
-          </div>
-        </div>
+       
       </div>
-      <h2>No information for this customer</h2>
       </div>
           
     </section>
