@@ -184,9 +184,12 @@ fetch('https://fe-apps.herokuapp.com/api/v1/overlook/1903/room-services/roomServ
           function createBookingforToday(e) {
                 e.preventDefault()
                 let value = parseInt(e.target.parentNode.parentNode.childNodes[1].childNodes[0].innerHTML)             
-                if ($('.selected-customer').html() !== ""){
+                if ($('.selected-customer').html() !== "" && e.target.matches('#book-btn-today')){
                     booking = new Booking (customer.id, hotel.currentDate, value)
-                    console.log(booking)
+                    bookingData.push(booking)
+                    console.log(bookingData)
+                    console.log(bookingRepo.returnAvailableRooms(hotel.currentDate).length)
+                    domUpdates.displayAvailability(bookingRepo.returnAvailableRooms(hotel.currentDate).length)
                 }
           }
 
