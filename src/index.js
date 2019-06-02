@@ -18,7 +18,6 @@ import './css/base.scss';
 // An example of how you tell webpack to use an image (also need to link to it in the index.html)
 import './images/turing-logo.png'
 
-console.log('This is the JavaScript entry file - your code begins here.');
 
 import fetch from 'cross-fetch';
 import domUpdates from './domUpdates';
@@ -98,8 +97,22 @@ fetch('https://fe-apps.herokuapp.com/api/v1/overlook/1903/room-services/roomServ
         domUpdates.displayRoomServiceDetailsPerDate(roomServiceRepo.returnAllCustomerServiceOrdersForOneDate(hotel.currentDate))
         domUpdates.displayHotelsMostPopularDate(bookingRepo.showMostPopularBookingDate());
         domUpdates.displayHotelsLeastPopularDate(bookingRepo.showLeastPopularBookingDate());
-        
 
+        function checkOccupancy() {
+            if (hotel.bookingRepo.calculateNumberOfOccupiedRoomsByDate(hotel.currentDate) === 0) {
+                $('.book-a-room-btn').removeClass('hidden')
+            }
+        }
+        checkOccupancy();
+        
+        $('.book-a-room-btn').on('click', showRoomTypesInput)
+        $('.book-a-room-btn').on('submit', showRoomTypesInput)
+
+        function showRoomTypesInput(e) {
+            e.preventDefault()
+            $('.rooms-by-type').removeClass('hidden')
+        }
+        
         $(".guest-search-button").on('click', searchGuest);
         $(".guest-search-button").on('submit', searchGuest);
         $('.add-customer-button').on('click', addGuest);
@@ -107,6 +120,9 @@ fetch('https://fe-apps.herokuapp.com/api/v1/overlook/1903/room-services/roomServ
         $('.search-rooms-by-date-btn').on('click', searchAvailableRooms);
         $('.search-rooms-by-date-btn').on('submit', searchAvailableRooms);
         
+        $('#room-type-list').on('change', displayAllTodaysAvailableRooms);
+
+
         function searchGuest(e) {
             e.preventDefault()
             let inputValue = $(".guest-search-input").val()
@@ -152,8 +168,27 @@ fetch('https://fe-apps.herokuapp.com/api/v1/overlook/1903/room-services/roomServ
             $(".search-date-input").val('')
           }
 
+          function displayAllTodaysAvailableRooms(e) {
+            e.preventDefault()
+            let inputValue = $("#room-type-list").val()
+            if(bookingRepo.filterTodayAvailableRoomsByType(hotel.currentDate, inputValue).length === 0){
+                domUpdates.appendRemainingRoomsAfterFilter(bookingRepo.returnAvailableRooms(hotel.currentDate))
+            }
+            domUpdates.filterAllRoomsByDateAndType(bookingRepo.filterTodayAvailableRoomsByType(hotel.currentDate, inputValue));           
+        }
+        
 
+        $('#tab-3').on('click', createBookingforToday);
+        $('#tab-3').on('submit', createBookingforToday);
 
+          function createBookingforToday(e) {
+                e.preventDefault()
+                let value = parseInt(e.target.parentNode.parentNode.childNodes[1].childNodes[0].innerHTML)             
+                if ($('.selected-customer').html() !== ""){
+                    booking = new Booking (customer.id, hotel.currentDate, value)
+                    console.log(booking)
+                }
+          }
 
 
 

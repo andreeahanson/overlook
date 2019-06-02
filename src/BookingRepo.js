@@ -40,6 +40,15 @@ class BookingRepo {
     return this.roomData.filter(room => room.roomType === type)
   }
   
+  filterTodayAvailableRoomsByType(date, type) {
+    return this.returnAvailableRooms(date).filter(room => room.roomType === type)
+  }
+
+  filterRoomsByDateAndType() {
+    domUpdates.filterAllRoomsByDateAndType(filterTodayAvailableRoomsByType(date, type))
+  }
+
+
   addNewBooking() {
     let booking = new Booking(555, "25/08/2019", 143)
     this.bookingData.push(booking)
