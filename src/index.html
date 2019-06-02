@@ -83,7 +83,7 @@
             </ul>
         </div>
         <!-- BUTTON HAS HIDDEN CLASS WHEN NO BOOKINGS FOR TODAY -->
-        <button class="book-a-room-btn">Book a room for today</button>
+        <button class="book-a-room-btn hidden">Book a room for today</button>
         <div class="rooms-by-type hidden">
         <!-- <h2>Filter Rooms By Type</h2> -->
         <select name="room-type" id="room-type-list">
@@ -108,15 +108,12 @@
 
         
         <h2>Client's new booking</h2>
-        <div class="align-horizontally room-booking-head">
-            <h2>Room Date</h2>
-            <h2>Booking</h2>
-        </div>
         <ul class="room-booking-list-ul">
           <li class="align-horizontally">
-            <p class="room-booking-list room-date">##/##/####</p>
-            <p class="room-booking-list room-booking">############</p>
-            <div class="room-service-menu">
+            <p class="room-booking-list room-client-name">Name</p>
+            <p class="room-booking-list room-date">Date</p>
+            <p class="room-booking-list room-booking">Room</p>
+            <div class="room-service-menu hidden">
                 <button>Order Room Service</button>
                 <h2>Menu</h2>
                 <ul>

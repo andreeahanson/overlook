@@ -110,8 +110,11 @@ fetch('https://fe-apps.herokuapp.com/api/v1/overlook/1903/room-services/roomServ
 
         function showRoomTypesInput(e) {
             e.preventDefault()
-            $('.rooms-by-type').removeClass('hidden')
+            if ($('.selected-customer').html() !== ""){
+                $('.rooms-by-type').slideToggle().removeClass('hidden')
+            }
         }
+        
         
         $(".guest-search-button").on('click', searchGuest);
         $(".guest-search-button").on('submit', searchGuest);
@@ -126,6 +129,7 @@ fetch('https://fe-apps.herokuapp.com/api/v1/overlook/1903/room-services/roomServ
         function searchGuest(e) {
             e.preventDefault()
             let inputValue = $(".guest-search-input").val()
+            
             let obj = customerRepo.findCustomerByName(inputValue)
             if(!obj) {
               domUpdates.displayErrorMsg()
@@ -140,6 +144,7 @@ fetch('https://fe-apps.herokuapp.com/api/v1/overlook/1903/room-services/roomServ
             }
             }
             $(".guest-search-input").val('')
+            $('.book-a-room-btn').removeClass('hidden')
           }
 
         function addGuest(e) {
@@ -148,12 +153,15 @@ fetch('https://fe-apps.herokuapp.com/api/v1/overlook/1903/room-services/roomServ
             customer = new Customer(Date.now(), inputValue)
             customerData.push(customer);
             domUpdates.displayNewName(customer)
+
+
             if (customerRepo.findOneCustomersBookings(customer.name).length === 0) {
                 domUpdates.displayNoBookingsMessage();
             } else {
                 domUpdates.displayAllOnesCustomerBookings(customerRepo.findOneCustomersBookings(customer.name))
             }
             $(".add-customer-input").val('')
+            $('.book-a-room-btn').removeClass('hidden')
           }
         
         function searchAvailableRooms(e) {
@@ -187,9 +195,10 @@ fetch('https://fe-apps.herokuapp.com/api/v1/overlook/1903/room-services/roomServ
                 if ($('.selected-customer').html() !== "" && e.target.matches('#book-btn-today')){
                     booking = new Booking (customer.id, hotel.currentDate, value)
                     bookingData.push(booking)
-                    console.log(bookingData)
                     console.log(bookingRepo.returnAvailableRooms(hotel.currentDate).length)
                     domUpdates.displayAvailability(bookingRepo.returnAvailableRooms(hotel.currentDate).length)
+                    let name = $('.selected-customer').html();
+                    domUpdates.displayNewBooking(name, booking)
                 }
           }
 
@@ -198,7 +207,7 @@ fetch('https://fe-apps.herokuapp.com/api/v1/overlook/1903/room-services/roomServ
 
     }
     
-    setTimeout(timer, 500);
+    setTimeout(timer, 800);
     
     
     

@@ -78,7 +78,6 @@ displayAvailableRoomsByDate(rooms) {
   <p><span class="bed-size-display">${room.bedSize}</span></p>  
   <p><span class="bidet-display">${room.bidet}</span></p> 
   <p><span class="room-price-display">${room.costPerNight}</span>$</p>
-  <p><button class="book-btn-date">Book Room</button></p>
 </li>`)  
 })
 },
@@ -99,7 +98,7 @@ filterAllRoomsByDateAndType(rooms) {
   <p><span class="bidet-display">${room.bidet}</span></p> 
   <p><span class="room-price-display">${room.costPerNight}</span>$</p>
   <p><button id="book-btn-today">Book Room</button></p>
-</li>`)  
+</li>`)
 })
 },
 
@@ -122,8 +121,26 @@ appendRemainingRoomsAfterFilter(rooms) {
   <p><button id="book-btn-today">Book Room</button></p>
 </li>`)  
 })
+}, 
 
-
+displayNewBooking(name, booking) {
+  console.log("Name", name)
+  console.log("Booking", booking)
+  $('.room-booking-list-ul').append(`<li class="align-horizontally">
+  <p class="room-booking-list room-date">${name}</p>
+  <p class="room-booking-list room-date">${booking.date}</p>
+  <p class="room-booking-list room-booking">${booking.roomNumber}</p>
+  <div class="room-service-menu">
+      <button>Order Room Service</button>
+      <h2 class="room-service-menu">Menu</h2>
+      <ul>
+        <!-- <li class="align-horizontally">
+          <p>Concrete sandwich</p>
+          <p><span class="room-service-price"></span>$</p>
+        </li> -->
+      </ul>
+    </div>
+</li>`)
 }
 
 
