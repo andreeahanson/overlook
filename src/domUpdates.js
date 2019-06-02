@@ -21,21 +21,10 @@ displayRevenueToday(revenue) {
 },
 
 displayBookingDetailsPerDate(bookingInfo) {
-  bookingInfo.push({
-    userID: 55,
-    date: "01/06/2019",
-    roomNumber: 133
-    })
   bookingInfo.forEach(room => $('.today-bookings').append(`<li class="room-number">Room: ${room.roomNumber}</li>`))
 },
 
 displayRoomServiceDetailsPerDate(roomService) {
-  roomService.push({
-    userID: 34,
-    date: "01/06/2019",
-    food: "Generic Plastic Sandwich",
-    totalCost: 9.48
-    })
   roomService.forEach(order => $('.today-orders').append(`<li class="room-number">Item: ${order.food}, Price: ${order.totalCost}</li>`))
 },
 
@@ -48,11 +37,13 @@ displayName(name) {
 },
 
 displayNoBookingsMessage() {
+  $('.one-customers-bookings').removeClass('hidden')
   $('.individual-customers-bookings').html('No bookings for this customer yet.')
   $('.customer-list-ul').html('')
 },
 
 displayAllOnesCustomerBookings(allBookings) {
+  $('.one-customers-bookings').removeClass('hidden')
   $('.individual-customers-bookings').html('Here are this customer\'s bookings')
   allBookings.forEach(booking => $('.customer-list-ul').append(`<li class="customer-list customer-date">${booking.date} <span class="booking-room-number">Room: ${booking.roomNumber}</span></li>`))
 },
@@ -74,15 +65,65 @@ displayDateErrorMsg() {
 },
 
 displayAvailableRoomsByDate(rooms) {
-  rooms.forEach(room => $('.availability-ul').append(`<li class="align-horizontally">
+  rooms.forEach(room => {
+    if (room.bidet === false){
+      room.bidet = "no"
+    } else {
+      room.bidet = "yes"
+    }
+    $('.availability-ul').append(`<li class="align-horizontally">
   <p><span class="room-number-display">${room.number}</span> 
   <p><span class="room-type-display">${room.roomType}</span></p>
   <p><span class="number-of-beds-display">${room.numBeds}</span></p> 
   <p><span class="bed-size-display">${room.bedSize}</span></p>  
   <p><span class="bidet-display">${room.bidet}</span></p> 
   <p><span class="room-price-display">${room.costPerNight}</span>$</p>
-</li>`))
-  
+  <p><button class="book-btn-date">Book Room</button></p>
+</li>`)  
+})
+},
+
+filterAllRoomsByDateAndType(rooms) {
+  $('.filter-today-rooms').children().remove();
+  rooms.forEach(room => {
+    if (room.bidet === false){
+      room.bidet = "no"
+    } else {
+      room.bidet = "yes"
+    }
+    $('.filter-today-rooms').append(`<li class="align-horizontally">
+  <p><span class="room-number-display">${room.number}</span> 
+  <p><span class="room-type-display">${room.roomType}</span></p>
+  <p><span class="number-of-beds-display">${room.numBeds}</span></p> 
+  <p><span class="bed-size-display">${room.bedSize}</span></p>  
+  <p><span class="bidet-display">${room.bidet}</span></p> 
+  <p><span class="room-price-display">${room.costPerNight}</span>$</p>
+  <p><button id="book-btn-today">Book Room</button></p>
+</li>`)  
+})
+},
+
+appendRemainingRoomsAfterFilter(rooms) {
+  $('.message-after-filter-no-results').html("There are no rooms available of that type at the moment for the current date. Here are all the rooms available.")
+  $('.filter-today-rooms').children().remove();
+  rooms.forEach(room => {
+    if (room.bidet === false){
+      room.bidet = "no"
+    } else {
+      room.bidet = "yes"       
+    }
+    $('.filter-today-rooms').append(`<li class="align-horizontally">
+  <p><span class="room-number-display">${room.number}</span> 
+  <p><span class="room-type-display">${room.roomType}</span></p>
+  <p><span class="number-of-beds-display">${room.numBeds}</span></p> 
+  <p><span class="bed-size-display">${room.bedSize}</span></p>  
+  <p><span class="bidet-display">${room.bidet}</span></p> 
+  <p><span class="room-price-display">${room.costPerNight}</span>$</p>
+  <p><button id="book-btn-today">Book Room</button></p>
+</li>`)  
+})
+
+
 }
 
 

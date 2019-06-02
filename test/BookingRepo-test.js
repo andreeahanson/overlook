@@ -136,6 +136,27 @@ describe('BookingRepo', function() {
         }]);
     })
 
+
+    it('should return the available rooms based on the date and the type of room', function() {
+      expect(bookingRepo.filterTodayAvailableRoomsByType("17/07/2019", "single room")).to.eql([
+        {
+        number: 2,
+        roomType: "single room",
+        bidet: true,
+        bedSize: "twin",
+        numBeds: 2,
+        costPerNight: 462.7
+        },
+        {
+        number: 3,
+        roomType: "single room",
+        bidet: false,
+        bedSize: "queen",
+        numBeds: 1,
+        costPerNight: 344.89
+        }]);
+    })
+
     it('should return the detais of the occupied rooms based on the date', function() {
       expect(bookingRepo.returnBookingDetailsByDate("07/02/2020")).to.eql([{
         userID: 61,

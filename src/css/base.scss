@@ -157,3 +157,18 @@ ul {
 .today-orders{
   background-color: coral;
 }
+
+.hidden {
+  display: none;
+}
+
+.filter-today-rooms {
+  max-height: 150px;
+  overflow: scroll;
+  line-height: 0.1;
+  font-size: 13px;
+}
+
+.book-a-room-btn {
+  margin-top: 20px;
+}

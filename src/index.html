@@ -9,7 +9,7 @@
     <hr>
     <div class="align-horizontally to-date">
     <h2 class="date">00/00/0000</h2>
-    <h2 class="selected-customer">Selected Customer</h2>
+    <h2 class="selected-customer"></h2>
     </div>
   </header>
   <main>
@@ -24,8 +24,8 @@
       
       <div id="tab-1" class="tab-content current">
           <h2>Total available rooms today: <span class="available-rooms">#</span></h2>
-          <h2>Total revenue today: <span class="total-revenue-today">#</span>$</h2>
-          <h2>Total rooms occupied today: <span class="occupation-rate"></span></h2>
+          <h2>Total expected revenue today: <span class="total-revenue-today">#</span>$TO ADD REVENUE FROM ROOM SERVICE!!!!!</h2>
+          <h2>Total rooms occupied today: <span class="occupation-rate"></span>TO TURN INTO PERCENTAGE!!!!!</h2>
           <br>
           <h2>Today's bookings: </h2>
           <ul class="today-bookings">
@@ -50,14 +50,14 @@
         </form>
       </div>
       <div id="tab-3" class="tab-content">
-          <div class="align-horizontally">
+          <div class="align-horizontally one-customers-bookings hidden">
               <div class="align-vertically">
                 <h2 class="individual-customers-bookings">Date & Room</h2>
                 <ul class="customer-list-ul">
     
                 </ul>
               </div>
-            </div>
+          </div>
             <br>
         <div class="align-horizontally">
           <h2>Top booking date: <span class="top-booking-date">#</span></h2>
@@ -78,26 +78,39 @@
                 <p>Bed Size</p>
                 <p>Bidet</p>
                 <p>Price</p>
+                <p>Book</p>
               </div>
-              
             </ul>
+        </div>
+        <!-- BUTTON HAS HIDDEN CLASS WHEN NO BOOKINGS FOR TODAY -->
+        <button class="book-a-room-btn">Book a room for today</button>
+        <div class="rooms-by-type hidden">
+        <!-- <h2>Filter Rooms By Type</h2> -->
+        <select name="room-type" id="room-type-list">
+          <option value="single room">single room</option>
+          <option value="junior suite">junior Sweet</option>
+          <option value="suite">suite</option>
+          <option value="residential suite">residential suite</option>
+        </select>
+        <h2 class="message-after-filter-no-results"></h2>
+        <div class="align-horizontally sorted-rooms">
+            <p>Room</p> 
+            <p>Type</p> 
+            <p>Beds#</p>
+            <p>Bed Size</p>
+            <p>Bidet</p>
+            <p>Price</p>
+            <p>Book</p>
           </div>
-        <h2>Book a room</h2>
+        <ul class="filter-today-rooms">
+        </ul>
+        </div>
         <form class="generate-booking-room-form">
           <input type="text" placeholder="booking date" for="booking-date">
           <input type="text" placeholder="room number" for="room-number">
           <button>Create Booking</button>
         </form>
 
-        <div class="rooms-by-type align-horizontally">
-            <h2>Filter Rooms By Type</h2>
-            <select name="room-type" id="room-type-list">
-              <option value="single-room">Single Room</option>
-              <option value="junior-suite">Junior Sweet</option>
-              <option value="suite">Suite</option>
-              <option value="residential-suite"> Residential Suite</option>
-            </select>
-        </div>
         
         <h2>Created booking</h2>
         <div class="align-horizontally room-booking-head">
