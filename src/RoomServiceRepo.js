@@ -1,4 +1,5 @@
 import RoomService from './RoomService'
+import domUpdates from "./domUpdates"
 
 class RoomServiceRepo {
   constructor(roomServiceData, customer){

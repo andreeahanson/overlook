@@ -94,9 +94,13 @@ fetch('https://fe-apps.herokuapp.com/api/v1/overlook/1903/room-services/roomServ
         domUpdates.displayOccupancy(hotel.bookingRepo.calculateNumberOfOccupiedRoomsByDate(hotel.currentDate))
         domUpdates.displayRevenueToday(bookingRepo.showTotalBookingRevenueToday(hotel.currentDate))
         domUpdates.displayBookingDetailsPerDate(bookingRepo.returnBookingDetailsByDate(hotel.currentDate))
-        domUpdates.displayRoomServiceDetailsPerDate(roomServiceRepo.returnAllCustomerServiceOrdersForOneDate(hotel.currentDate))
+        
         domUpdates.displayHotelsMostPopularDate(bookingRepo.showMostPopularBookingDate());
         domUpdates.displayHotelsLeastPopularDate(bookingRepo.showLeastPopularBookingDate());
+
+        checkForRoomService()
+
+
 
         function checkOccupancy() {
             if (hotel.bookingRepo.calculateNumberOfOccupiedRoomsByDate(hotel.currentDate) === 0) {
@@ -146,6 +150,11 @@ fetch('https://fe-apps.herokuapp.com/api/v1/overlook/1903/room-services/roomServ
             }
             $(".guest-search-input").val('')
             $('.book-a-room-btn').removeClass('hidden')
+            if (roomServiceRepo.returnCustomerServiceOrdersForOneCustomer(customer.id).length === 0) {
+                domUpdates.displayNoCustomerServiceMessage()
+            } else {
+                domUpdates.showIndividualCustomersOrders(roomServiceRepo.returnCustomerServiceOrdersForOneCustomer(customer.id))
+            }
           }
 
         function addGuest(e) {
@@ -159,6 +168,11 @@ fetch('https://fe-apps.herokuapp.com/api/v1/overlook/1903/room-services/roomServ
                 domUpdates.displayNoBookingsMessage();
             } else {
                 domUpdates.displayAllOnesCustomerBookings(customerRepo.findOneCustomersBookings(customer.name))
+            }
+            if (roomServiceRepo.returnCustomerServiceOrdersForOneCustomer(customer.id).length === 0) {
+                domUpdates.displayNoCustomerServiceMessage()
+            } else {
+                domUpdates.showIndividualCustomersOrders(roomServiceRepo.returnCustomerServiceOrdersForOneCustomer(customer.id))
             }
             $(".add-customer-input").val('')
             $('.book-a-room-btn').removeClass('hidden')
@@ -229,6 +243,26 @@ fetch('https://fe-apps.herokuapp.com/api/v1/overlook/1903/room-services/roomServ
             }
         }
 
+        $('.search-orders-by-date-btn').on('click', displayAllTodaysRoomServiceOrders);
+        $('.search-orders-by-date-btn').on('submit', displayAllTodaysRoomServiceOrders);
+
+        function displayAllTodaysRoomServiceOrders(e) {
+            e.preventDefault();
+            let inputValue = $(".search-date-input-room-service").val()
+            console.log("HEY!!!!!", roomServiceRepo.returnAllCustomerServiceOrdersForOneDate(inputValue).length)
+            if(roomServiceRepo.returnAllCustomerServiceOrdersForOneDate(inputValue).length === 0){
+                domUpdates.displayNoCustomerServiceMessage()
+            }
+            domUpdates.displayAllRoomServiceOrdersByDate(roomServiceRepo.returnAllCustomerServiceOrdersForOneDate(inputValue));           
+        }
+        
+        function checkForRoomService() {
+            if(roomServiceRepo.returnAllCustomerServiceOrdersForOneDate(hotel.currentDate).length === 0){
+                domUpdates.displayNoCustomerServiceMessage()
+            } else {
+                domUpdates.displayAllRoomServiceOrdersByDate(roomServiceRepo.returnAllCustomerServiceOrdersForOneDate(hotel.currentDate))   
+            }
+        }
 
     }
     
