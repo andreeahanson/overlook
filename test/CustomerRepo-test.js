@@ -6,8 +6,8 @@ import spies from 'chai-spies';
 import Customer from '../src/Customer';
 chai.use(spies);
 
-// import domUpdates from '../src/domUpdates.js';
-// chai.spy.on(domUpdates, 'displayWords', () => true);
+import domUpdates from '../src/domUpdates.js';
+chai.spy.on(domUpdates, 'displayNewName', () => true);
 
 const customerSampleData = [
     {

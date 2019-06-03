@@ -19,21 +19,22 @@ class BookingRepo {
     return availableRooms
   }
   
-  displayAvailableRooms(date) {
-    domUpdates.displayAvailableRoomsByDate(returnAvailableRooms(date))
-  }
+  // displayAvailableRooms(date) {
+  //   domUpdates.displayAvailableRoomsByDate(returnAvailableRooms(date))
+  // }
 
   returnBookingDetailsByDate(date) {
     return this.bookingData.filter(room => room.date === date)
   }
 
-  displayBookedRooms() {
-    domUpdates.displayBookingDetailsPerDate(this.returnBookingDetailsByDate(date))
-  }
+  // displayBookedRooms() {
+  //   domUpdates.displayBookingDetailsPerDate(this.returnBookingDetailsByDate(date))
+  // }
 
   calculateAvailableRoomsByDate(date) {
     let availableRooms = this.totalRooms - this.bookingData.filter(room => room.date === date).length;
     domUpdates.displayAvailability(availableRooms)
+    return availableRooms
   }
 
   filterRoomsByType(type) {
@@ -44,9 +45,9 @@ class BookingRepo {
     return this.returnAvailableRooms(date).filter(room => room.roomType === type)
   }
 
-  filterRoomsByDateAndType() {
-    domUpdates.filterAllRoomsByDateAndType(filterTodayAvailableRoomsByType(date, type))
-  }
+  // filterRoomsByDateAndType() {
+  //   domUpdates.filterAllRoomsByDateAndType(filterTodayAvailableRoomsByType(date, type))
+  // }
 
 
   addNewBooking() {
@@ -69,9 +70,9 @@ class BookingRepo {
     return mostPopularDate
   }
 
-  displayMostPopularDate() {
-    domUpdates.displayHotelsMostPopularDate(showMostPopularBookingDate);
-  }
+  // displayMostPopularDate() {
+  //   domUpdates.displayHotelsMostPopularDate(showMostPopularBookingDate);
+  // }
 
   showLeastPopularBookingDate() {
     let dates = this.bookingData.map(book => book.date)
@@ -83,9 +84,9 @@ class BookingRepo {
     return leastPopularDate
   } 
 
-  displayLeastPopularDate() {
-    domUpdates.displayHotelsLeastPopularDate(showLeastPopularBookingDate);
-  }
+  // displayLeastPopularDate() {
+  //   domUpdates.displayHotelsLeastPopularDate(showLeastPopularBookingDate);
+  // }
   
   showCustomersBookings(customerID) {
     return this.bookingData.filter(book => book.userID === customerID);
