@@ -134,6 +134,7 @@ fetch('https://fe-apps.herokuapp.com/api/v1/overlook/1903/room-services/roomServ
             if(!obj) {
               domUpdates.displayErrorMsg()
             } else {
+            $('.general-info').addClass('hidden')
             customer = new Customer(obj.id, obj.name)
             console.log(customer)
             domUpdates.displayName(obj)
@@ -151,6 +152,7 @@ fetch('https://fe-apps.herokuapp.com/api/v1/overlook/1903/room-services/roomServ
             e.preventDefault()
             let inputValue = $(".add-customer-input").val()
             customer = new Customer(Date.now(), inputValue)
+            $('.general-info').addClass('hidden')
             customerData.push(customer);
             domUpdates.displayNewName(customer)
 
@@ -189,9 +191,10 @@ fetch('https://fe-apps.herokuapp.com/api/v1/overlook/1903/room-services/roomServ
         $('#tab-3').on('click', createBookingforToday);
         $('#tab-3').on('submit', createBookingforToday);
 
-          function createBookingforToday(e) {
+        function createBookingforToday(e) {
                 e.preventDefault()
-                let value = parseInt(e.target.parentNode.parentNode.childNodes[1].childNodes[0].innerHTML)             
+                let value = parseInt(e.target.parentNode.parentNode.childNodes[1].childNodes[0].innerHTML)  
+                console.log(value)       
                 if ($('.selected-customer').html() !== "" && e.target.matches('#book-btn-today')){
                     booking = new Booking (customer.id, hotel.currentDate, value)
                     bookingData.push(booking)
@@ -200,7 +203,16 @@ fetch('https://fe-apps.herokuapp.com/api/v1/overlook/1903/room-services/roomServ
                     let name = $('.selected-customer').html();
                     domUpdates.displayAllOnesCustomerBookings(customerRepo.findOneCustomersBookings(customer.name))
                 }
-          }
+                e.target.closest('li').remove();
+        }
+
+        $('#tab-3').on('click', addRoomServiceMenu);
+
+        function addRoomServiceMenu(e) {
+            e.preventDefault();
+            if (e.target.matches('.booking-room-service-button'))
+            domUpdates.appendRoomServiceMenu($('.customer-list'));
+        }
 
 
 
