@@ -24,9 +24,17 @@ displayBookingDetailsPerDate(bookingInfo) {
   bookingInfo.forEach(room => $('.today-bookings').append(`<li class="room-number">Room: ${room.roomNumber}</li>`))
 },
 
-displayRoomServiceDetailsPerDate(roomService) {
-  roomService.forEach(order => $('.today-orders').append(`<li class="room-number">Item: ${order.food}, Price: ${order.totalCost}</li>`))
-},
+// displayRoomServiceDetailsPerDate(roomService) {
+//   console.log("WHAT??????")
+//   console.log(roomService)
+//   roomService.forEach(order => {
+//     $('.customer-service-ul').append(`<li class="align-horizontally">
+//   <p><span class="order-date-display">${order.date}</span></p> 
+//   <p><span class="order-food-display">${order.food}</span></p> 
+//   <p><span class="price-display">${order.totalCost}</span></p>
+// </li>`)  
+//   })
+// },
 
 displayErrorMsg() {
   alert('No guest by that name')
@@ -48,6 +56,7 @@ displayAllOnesCustomerBookings(allBookings) {
   $('.individual-customers-bookings').html('Here are this customer\'s bookings')
   allBookings.forEach(booking => $('.customer-list-ul').append(`<li class="customer-list customer-date">${booking.date} <span class="booking-room-number">Room: ${booking.roomNumber}</span></li>`))
 },
+
 
 displayNewName(name) {
   $('.selected-customer').html(name.name)
@@ -125,13 +134,34 @@ appendRemainingRoomsAfterFilter(rooms) {
 }, 
 
 showIndividualCustomersOrders(orders) {
+  $('.every-order-for-indivitual-customer').removeClass('hidden')
+  $('.room-service-heads').removeClass('hidden')
   $('.every-order-for-indivitual-customer').html('')
+  $('.room-service-message').html('Here are this customer\'s orders')
   orders.forEach(order => {
     $('.every-order-for-indivitual-customer').append(`<li class="align-horizontally">
     <p><span class="order-date-display">${order.date}</span></p> 
     <p><span class="order-food-display">${order.food}</span></p>
     <p><span class="order-price-display">${order.totalCost}</span></p> 
   </li>`)
+  })
+}, 
+
+displayNoCustomerServiceMessage() {
+  $(".hotels-customer-service-message-per-date").removeClass('hidden')
+  $(".hotels-customer-service-message-per-date").html("No orders for current date")
+},
+
+
+displayAllRoomServiceOrdersByDate(allDates) {
+  $(".hotels-customer-service-message-per-date").html("Here are the orders for the current date")
+  $('.customer-service-ul').html('')
+  allDates.forEach (date => {
+    $('.customer-service-ul').append(`<li class="align-horizontally">
+      <p><span class="order-display">${date.date}</span></p> 
+      <p><span class="order-display">${date.food}</span></p> 
+      <p><span class="price-display">${date.totalCost}</span></p>
+    </li>`)  
   })
 }
 
