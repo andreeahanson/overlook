@@ -16,7 +16,15 @@ class CustomerRepo {
 
 
     findCustomerByName(currentName) {
-        return this.customerData.find(customer => customer.name.toUpperCase() === currentName.toUpperCase())
+        let searchedCustomer =  this.customerData.filter(customer => customer.name.toUpperCase().includes(currentName.toUpperCase()))
+        console.log("ME", searchedCustomer)
+        if (searchedCustomer.length > 0) {
+            domUpdates.searchCustomerFilterAutofill(searchedCustomer)
+        } else {
+            // domUpdates.displayErrorMsg()
+            console.log("NO")
+        }
+        return searchedCustomer
     }
     
     // displayCustomerName(currentName) {

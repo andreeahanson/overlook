@@ -122,6 +122,7 @@ fetch('https://fe-apps.herokuapp.com/api/v1/overlook/1903/room-services/roomServ
         
         $(".guest-search-button").on('click', searchGuest);
         $(".guest-search-button").on('submit', searchGuest);
+        $(".guest-search-input").on('input', searchGuest);
         $('.add-customer-button').on('click', addGuest);
         $('.add-customer-button').on('submit', addGuest);
         $('.search-rooms-by-date-btn').on('click', searchAvailableRooms);
@@ -142,6 +143,7 @@ fetch('https://fe-apps.herokuapp.com/api/v1/overlook/1903/room-services/roomServ
             customer = new Customer(obj.id, obj.name)
             console.log(customer)
             domUpdates.displayName(obj)
+            domUpdates.searchCustomerFilterAutofill()
             if (customerRepo.findOneCustomersBookings(obj.name).length === 0) {
                 domUpdates.displayNoBookingsMessage();
             } else {

@@ -44,6 +44,14 @@ displayName(name) {
   $('.selected-customer').html(name.name)
 },
 
+searchCustomerFilterAutofill(users) {
+  $('.search-customer-filter').text('')
+  console.log(users)
+  users.forEach(user => {
+    $('.search-customer-filter').append(`<p>${user.name}</p>`)
+  })
+},
+
 displayNoBookingsMessage() {
   $('.one-customers-bookings').removeClass('hidden')
   $('.individual-customers-bookings').html('No bookings for this customer yet.')
