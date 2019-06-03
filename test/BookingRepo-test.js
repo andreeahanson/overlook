@@ -6,8 +6,8 @@ import spies from 'chai-spies';
 import Booking from '../src/Booking';
 chai.use(spies);
 
-// import domUpdates from '../src/domUpdates.js';
-// chai.spy.on(domUpdates, 'displayWords', () => true);
+import domUpdates from '../src/domUpdates.js';
+chai.spy.on(domUpdates, 'displayAvailability', () => true);
 
 const bookingRepoSampleData = [
   {

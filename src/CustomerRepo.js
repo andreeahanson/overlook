@@ -19,9 +19,9 @@ class CustomerRepo {
         return this.customerData.find(customer => customer.name.toUpperCase() === currentName.toUpperCase())
     }
     
-    displayCustomerName(currentName) {
-        domUpdates.displayName(findCustomerByName(currentName))
-    }
+    // displayCustomerName(currentName) {
+    //     domUpdates.displayName(findCustomerByName(currentName))
+    // }
 
     validateCustomer(name){
         let allNames = this.customerData.map(el => el.name.toUpperCase());
@@ -32,9 +32,9 @@ class CustomerRepo {
         return this.bookingData.filter(booking => booking.userID === this.findCustomerByName(currentName).id)
     }
 
-    displayCustomerBookings(currentName) {
-        domUpdates.displayAllOnesCustomerBookings(findOneCustomersBookings(currentName))
-    }
+    // displayCustomerBookings(currentName) {
+    //     domUpdates.displayAllOnesCustomerBookings(findOneCustomersBookings(currentName))
+    // }
 
 }
 
