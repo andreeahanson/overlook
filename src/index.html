@@ -43,11 +43,18 @@
         <h2>Date: <span class="room-service-amount">100</span>$</h2>
         <h2>Overall: <span class="room-service-overall-amount">300</span>$</h2>
         <h2>No information for this customer</h2>
-        <h2>Today's orders <span class="today-orders">order1</span></h2>
+        <h2>Today's orders</h2>
         <form>
           <input type="text" placeholder="search-orders-by-date">
           <button>Search</button>
         </form>
+        <h2>Here are this customer's orders today</h2>
+        <div class="align-horizontally">
+            <p>Date</p> 
+            <p>Order</p> 
+            <p>Price</p>
+          </div>
+          <ul class="every-order-for-indivitual-customer align-horizontally"></ul>
       </div>
       <div id="tab-3" class="tab-content">
           <div class="align-horizontally one-customers-bookings hidden">
@@ -82,7 +89,31 @@
                 <p>Book</p>
               </div>
             </ul>
-        </div>
+          </div>
+          <button class="order-room-service-btn hidden">Order Room Service</button>
+          <div class="order-room-service hidden">
+              <h2 class="menu">Click on item to place order</h2>
+              <ul id="room-service">
+                  <li class="item">
+                    <p class="name-item buy">mustard chocolate wrap</p>
+                    <p class="price-room-service buy"> 11.11$</p>
+                  </li>
+                  <li class="item">
+                    <p class="name-item buy">ketchup smoothie</p>
+                    <p class="price-room-service buy"> 10.10$</p>
+                  </li>
+                  <li class="item">
+                    <p class="name-item buy">suite sandwitch </p>
+                    <p class="price-room-service buy"> 12.11$</p>
+                  </li>
+                  <li class="item">
+                    <p class="name-item buy">residential sandwitch </p>
+                    <p class="price-room-service buy"> 11.11$</p>
+                  </li>
+              </ul>
+          </div>
+
+        </br>
         <!-- BUTTON HAS HIDDEN CLASS WHEN NO BOOKINGS FOR TODAY -->
         <button class="book-a-room-btn hidden">Book a room for today</button>
         <div class="rooms-by-type hidden">

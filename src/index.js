@@ -155,8 +155,6 @@ fetch('https://fe-apps.herokuapp.com/api/v1/overlook/1903/room-services/roomServ
             $('.general-info').addClass('hidden')
             customerData.push(customer);
             domUpdates.displayNewName(customer)
-
-
             if (customerRepo.findOneCustomersBookings(customer.name).length === 0) {
                 domUpdates.displayNoBookingsMessage();
             } else {
@@ -193,28 +191,43 @@ fetch('https://fe-apps.herokuapp.com/api/v1/overlook/1903/room-services/roomServ
 
         function createBookingforToday(e) {
                 e.preventDefault()
-                let value = parseInt(e.target.parentNode.parentNode.childNodes[1].childNodes[0].innerHTML)  
-                console.log(value)       
-                if ($('.selected-customer').html() !== "" && e.target.matches('#book-btn-today')){
-                    booking = new Booking (customer.id, hotel.currentDate, value)
-                    bookingData.push(booking)
-                    console.log(bookingRepo.returnAvailableRooms(hotel.currentDate).length)
-                    domUpdates.displayAvailability(bookingRepo.returnAvailableRooms(hotel.currentDate).length)
-                    let name = $('.selected-customer').html();
-                    domUpdates.displayAllOnesCustomerBookings(customerRepo.findOneCustomersBookings(customer.name))
+                if(e.target.matches('#book-btn-today')){
+                    let value = parseInt(e.target.parentNode.parentNode.childNodes[1].childNodes[0].innerHTML)  
+                    console.log(value)       
+                    if ($('.selected-customer').html() !== "" && e.target.matches('#book-btn-today')){
+                        booking = new Booking (customer.id, hotel.currentDate, value)
+                        bookingData.push(booking)
+                        console.log(bookingRepo.returnAvailableRooms(hotel.currentDate).length)
+                        domUpdates.displayAvailability(bookingRepo.returnAvailableRooms(hotel.currentDate).length)
+                        let name = $('.selected-customer').html();
+                        domUpdates.displayAllOnesCustomerBookings(customerRepo.findOneCustomersBookings(customer.name))
+                    }
+                    e.target.closest('li').remove();
+                    $('.order-room-service-btn').removeClass('hidden')
                 }
-                e.target.closest('li').remove();
         }
 
-        $('#tab-3').on('click', addRoomServiceMenu);
+        $('.order-room-service-btn').on('click', displayRoomServiceMenu);
 
-        function addRoomServiceMenu(e) {
+        function displayRoomServiceMenu(e) {
             e.preventDefault();
-            if (e.target.matches('.booking-room-service-button'))
-            domUpdates.appendRoomServiceMenu($('.customer-list'));
+           $('.order-room-service').slideToggle().removeClass('hidden')
         }
 
+        $('.item').on('click', placeOrder) 
 
+        function placeOrder(e) {
+            e.preventDefault();
+            if(e.target.matches('.name-item')){
+                let order = $(e.target).html()
+                let price = parseFloat($(e.target).siblings().html());
+                console.log(order)
+                roomService = new RoomService(customer.id, hotel.currentDate, order, price)
+                roomServiceData.push(roomService)
+                console.log(roomServiceData.length)
+                domUpdates.showIndividualCustomersOrders(roomServiceRepo.returnCustomerServiceOrdersForOneCustomer(customer.id))
+            }
+        }
 
 
     }

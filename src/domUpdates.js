@@ -46,7 +46,7 @@ displayAllOnesCustomerBookings(allBookings) {
   $('.customer-list-ul').html('')
   $('.one-customers-bookings').removeClass('hidden')
   $('.individual-customers-bookings').html('Here are this customer\'s bookings')
-  allBookings.forEach(booking => $('.customer-list-ul').append(`<li class="customer-list customer-date">${booking.date} <span class="booking-room-number">Room: ${booking.roomNumber}</span> <button class="booking-room-service-button">Order Room Service</button></li>`))
+  allBookings.forEach(booking => $('.customer-list-ul').append(`<li class="customer-list customer-date">${booking.date} <span class="booking-room-number">Room: ${booking.roomNumber}</span></li>`))
 },
 
 displayNewName(name) {
@@ -113,7 +113,7 @@ appendRemainingRoomsAfterFilter(rooms) {
       room.bidet = "yes"       
     }
     $('.filter-today-rooms').append(`<li class="align-horizontally">
-  <p><span class="room-number-display">${room.number}</span> 
+  <p><span class="room-number-display">${room.number}</span></p> 
   <p><span class="room-type-display">${room.roomType}</span></p>
   <p><span class="number-of-beds-display">${room.numBeds}</span></p> 
   <p><span class="bed-size-display">${room.bedSize}</span></p>  
@@ -122,10 +122,17 @@ appendRemainingRoomsAfterFilter(rooms) {
   <p><button id="book-btn-today">Book Room</button></p>
 </li>`)  
 })
-},
+}, 
 
-appendRoomServiceMenu(target) {
-  target.append(`<p>HOHOHOHO</p>`)
+showIndividualCustomersOrders(orders) {
+  $('.every-order-for-indivitual-customer').html('')
+  orders.forEach(order => {
+    $('.every-order-for-indivitual-customer').append(`<li class="align-horizontally">
+    <p><span class="order-date-display">${order.date}</span></p> 
+    <p><span class="order-food-display">${order.food}</span></p>
+    <p><span class="order-price-display">${order.totalCost}</span></p> 
+  </li>`)
+  })
 }
 
 // displayNewBooking(name, booking) {

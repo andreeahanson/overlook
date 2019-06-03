@@ -178,3 +178,33 @@ ul {
   margin-left: 40px;
   margin-bottom: 10px;
 }
+
+.order-room-service {
+  background-color: aqua;
+}
+
+.menu {
+  text-align: center;
+}
+
+.item {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
+.buy {
+  width: 180px;
+}
+
+.blue {
+  background-color: blue;
+}
+
+.red {
+  background-color: red;
+}
+
+.each-order {
+  justify-content: space-between
+}
