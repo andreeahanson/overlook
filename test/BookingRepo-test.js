@@ -55,7 +55,7 @@ const bookingRepoSampleData = [
   const roomDataSample= [
     {
     number: 1,
-    roomType: "residential suite",
+    roomType: "junior suite",
     bidet: false,
     bedSize: "twin",
     numBeds: 2,
@@ -79,12 +79,20 @@ const bookingRepoSampleData = [
     },
     {
     number: 4,
-    roomType: "junior suite",
+    roomType: "suite",
     bidet: false,
     bedSize: "twin",
     numBeds: 1,
     costPerNight: 192.48
-    }];
+    }, 
+    {
+      number: 5,
+      roomType: "residential suite",
+      bidet: false,
+      bedSize: "queen",
+      numBeds: 1,
+      costPerNight: 344.89
+      }];
 
 describe('BookingRepo', function() {
     let bookingRepo;
@@ -110,13 +118,13 @@ describe('BookingRepo', function() {
     })
 
     it('should calculate the percentage of occupied rooms based on the date', function() {
-      expect(bookingRepo.calculateOccupationPercentageForDate("07/02/2020")).to.equal(50);
+      expect(bookingRepo.calculateOccupationPercentageForDate("07/02/2020")).to.equal(40);
     })
 
     it('should return the available rooms based on the date', function() {
       expect(bookingRepo.returnAvailableRooms("17/07/2019")).to.eql([{
         number: 1,
-        roomType: "residential suite",
+        roomType: "junior suite",
         bidet: false,
         bedSize: "twin",
         numBeds: 2,
@@ -137,7 +145,15 @@ describe('BookingRepo', function() {
         bedSize: "queen",
         numBeds: 1,
         costPerNight: 344.89
-        }]);
+        }, 
+        {
+          number: 5,
+          roomType: "residential suite",
+          bidet: false,
+          bedSize: "queen",
+          numBeds: 1,
+          costPerNight: 344.89
+          }]);
     })
 
 
@@ -175,7 +191,7 @@ describe('BookingRepo', function() {
     })
 
     it('should calculate the number of available rooms based on the date', function() {
-      expect(bookingRepo.calculateAvailableRoomsByDate("07/02/2020")).to.equal(2);
+      expect(bookingRepo.calculateAvailableRoomsByDate("07/02/2020")).to.equal(3);
     })
 
     it('should filter rooms by type', function() {
@@ -247,5 +263,37 @@ describe('BookingRepo', function() {
     expect(bookingRepo.noDataMessage(24)).to.equal("No data for this customer");
   })
 
+  it('should upgrate a customer\'s room for a specific date', function() {
+    // roomDataSample.push({
+    //   number: 5,
+    //   roomType: "residential suite",
+    //   bidet: false,
+    //   bedSize: "queen",
+    //   numBeds: 1,
+    //   costPerNight: 344.89
+    //   })
+    expect(bookingRepo.showCustomersBookings(83)).to.eql([{
+      userID: 83,
+      date: "15/01/2020",
+      roomNumber: 1
+      },
+      {
+        userID: 83,
+        date: "19/01/2020",
+        roomNumber: 2
+        }]);
+    
+    bookingRepo.upgradeRoom(83, "19/01/2020")
+    expect(bookingRepo.showCustomersBookings(83)).to.eql([{
+      userID: 83,
+      date: "15/01/2020",
+      roomNumber: 1
+      },
+      {
+        userID: 83,
+        date: "19/01/2020",
+        roomNumber: 1
+        }]);
+  })
     
 });

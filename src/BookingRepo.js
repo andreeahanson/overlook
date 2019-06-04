@@ -121,7 +121,59 @@ class BookingRepo {
     }, 0)
     return bookingCash;
   } 
+  
+  
+  upgradeRoom (customerID, date) {
+    
+    let singleRooms = this.roomData.filter(room => room.roomType === "single room").map(room => room.number)
+    let juniorSuites = this.roomData.filter(room => room.roomType === "junior suite").map(room => room.number)
+    let suites = this.roomData.filter(room => room.roomType === "suite").map(room => room.number)
+    let residentialSuites = this.roomData.filter(room => room.roomType === "residential suite").map(room => room.number)
+    
+    let singleRoom = {
+      count: 1,
+      type: "single room",
+      roomNumbers: singleRooms
+    }
+    let juniorSuite = {
+      count: singleRoom.count + 1,
+      type: "junior suite",
+      roomNumbers: juniorSuites
+    }
+    let suite = {
+      count: juniorSuite.count + 1,
+      type: "suite",
+      roomNumbers: suites
+    }
+    let residentialSuite = {
+      count: suite.count + 1,
+      type: "residential suite",
+      roomNumbers: residentialSuites
+    }
 
+    let sortedRoomNumbers = [singleRoom, juniorSuite, suite, residentialSuite]
+
+    let match = this.bookingData.filter(book => book.userID === customerID && book.date === date).reduce((acc, bookingA) => {
+      sortedRoomNumbers.forEach((roomType, index) => {
+        if (roomType.roomNumbers.includes(bookingA.roomNumber) && sortedRoomNumbers[index].count <= 3){
+          this.removeBooking(bookingA)
+          let plus = sortedRoomNumbers[index+1].type
+          let increase = this.filterTodayAvailableRoomsByType(date, plus)[0]
+          let numberT = increase.number
+          let booking = new Booking(customerID, date, numberT)
+          console.log(booking)
+          this.bookingData.push(booking)
+          acc = booking
+        } 
+      })
+      return acc
+    }, {})
+    return match
+    
+
+  }
+
+  
   
 
 }
