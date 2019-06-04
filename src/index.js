@@ -31,26 +31,6 @@ let roomService;
 let roomServiceRepo;
 
 
-// let userData = fetch('https://fe-apps.herokuapp.com/api/v1/overlook/1903/users/users').then(function(response){
-//     return response.json()});
-//  let roomServiceData = fetch('https://fe-apps.herokuapp.com/api/v1/overlook/1903/room-services/roomServices').then(function(response){
-//     return response.json()});
-//  let bookingData = fetch('https://fe-apps.herokuapp.com/api/v1/overlook/1903/bookings/bookings').then(function(response){
-//     return response.json()});
-//  let roomData = fetch('https://fe-apps.herokuapp.com/api/v1/overlook/1903/rooms/rooms').then(function(response){
-//     return response.json()});
-// let combinedData = {'userData':{}, 'roomServiceData':{}, 'bookingData':{}, 'roomData':{}}
-// // let request;
-
-// Promise.all([userData, roomServiceData, bookingData, roomData])
-//     .then(function(values) {
-//         combinedData['userData'] = values[0];
-//         combinedData['roomServiceData'] = values[1];
-//         combinedData['bookingData'] = values[2];
-//         combinedData['roomData'] = values[3];
-//         return combinedData;
-//     })
-//     .catch(error => console.log(`Error in promises ${error}`))
 $(document).ready(function(){
 let customerData;
 fetch('https://fe-apps.herokuapp.com/api/v1/overlook/1903/users/users')
@@ -87,17 +67,14 @@ fetch('https://fe-apps.herokuapp.com/api/v1/overlook/1903/room-services/roomServ
         bookingRepo = new BookingRepo (bookingData, roomData)
         hotel = new Hotel(bookingRepo);
         customerRepo = new CustomerRepo (customerData, bookingData);
-        // customer = new Customer (id, name)
         roomServiceRepo = new RoomServiceRepo (roomServiceData, customer)
         domUpdates.showCurrentDate(hotel.currentDate);
         domUpdates.displayAvailability(hotel.bookingRepo.calculateAvailableRoomsByDate(hotel.currentDate))
         domUpdates.displayOccupancy(hotel.bookingRepo.calculateNumberOfOccupiedRoomsByDate(hotel.currentDate))
         domUpdates.displayRevenueToday(bookingRepo.showTotalBookingRevenueToday(hotel.currentDate))
         domUpdates.displayBookingDetailsPerDate(bookingRepo.returnBookingDetailsByDate(hotel.currentDate))
-        
         domUpdates.displayHotelsMostPopularDate(bookingRepo.showMostPopularBookingDate());
         domUpdates.displayHotelsLeastPopularDate(bookingRepo.showLeastPopularBookingDate());
-
         checkForRoomService()
 
 
@@ -155,14 +132,17 @@ fetch('https://fe-apps.herokuapp.com/api/v1/overlook/1903/room-services/roomServ
             } else {
                 domUpdates.showIndividualCustomersOrders(roomServiceRepo.returnCustomerServiceOrdersForOneCustomer(customer.id))
             }
+            calculateTotalBalancePerAllCustomerDates()
           }
 
         function addGuest(e) {
             e.preventDefault()
+            console.log(roomServiceData.length)
             let inputValue = $(".add-customer-input").val()
             customer = new Customer(Date.now(), inputValue)
             $('.general-info').addClass('hidden')
             customerData.push(customer);
+            domUpdates.clearInputs();
             domUpdates.displayNewName(customer)
             if (customerRepo.findOneCustomersBookings(customer.name).length === 0) {
                 domUpdates.displayNoBookingsMessage();
@@ -174,15 +154,17 @@ fetch('https://fe-apps.herokuapp.com/api/v1/overlook/1903/room-services/roomServ
             } else {
                 domUpdates.showIndividualCustomersOrders(roomServiceRepo.returnCustomerServiceOrdersForOneCustomer(customer.id))
             }
+            calculateTotalBalancePerAllCustomerDates()
             $(".add-customer-input").val('')
             $('.book-a-room-btn').removeClass('hidden')
+
           }
         
         function searchAvailableRooms(e) {
             e.preventDefault()
             let inputValue = $(".search-date-input").val()
-            let objs = bookingRepo.returnAvailableRooms(inputValue)
-            if(!inputValue) {
+            // let objs = bookingRepo.returnAvailableRooms(inputValue)
+            if(!inputValue || inputValue.length<10) {
               domUpdates.displayDateErrorMsg()
             } else {
             domUpdates.displayAvailableRoomsByDate(bookingRepo.returnAvailableRooms(inputValue))
@@ -238,8 +220,9 @@ fetch('https://fe-apps.herokuapp.com/api/v1/overlook/1903/room-services/roomServ
                 console.log(order)
                 roomService = new RoomService(customer.id, hotel.currentDate, order, price)
                 roomServiceData.push(roomService)
-                console.log(roomServiceData.length)
+                calculateTotalBalancePerAllCustomerDates()
                 domUpdates.showIndividualCustomersOrders(roomServiceRepo.returnCustomerServiceOrdersForOneCustomer(customer.id))
+                domUpdates.displayTotalBalanceAllDaysPerCustomer(roomServiceRepo.returnTotalAmountSpentOnRoomServiceForOneCustomerAllDAys(customer.id))
             }
         }
 
@@ -249,7 +232,6 @@ fetch('https://fe-apps.herokuapp.com/api/v1/overlook/1903/room-services/roomServ
         function displayAllTodaysRoomServiceOrders(e) {
             e.preventDefault();
             let inputValue = $(".search-date-input-room-service").val()
-            console.log("HEY!!!!!", roomServiceRepo.returnAllCustomerServiceOrdersForOneDate(inputValue).length)
             if(roomServiceRepo.returnAllCustomerServiceOrdersForOneDate(inputValue).length === 0){
                 domUpdates.displayNoCustomerServiceMessage()
             } else {
@@ -258,16 +240,42 @@ fetch('https://fe-apps.herokuapp.com/api/v1/overlook/1903/room-services/roomServ
         }
         
         function checkForRoomService() {
+            roomServiceRepo.returnAllCustomerServiceOrdersForOneDate(hotel.currentDate)
             if(roomServiceRepo.returnAllCustomerServiceOrdersForOneDate(hotel.currentDate).length === 0){
                 domUpdates.displayNoCustomerServiceMessage()
             } else {
-                domUpdates.displayAllRoomServiceOrdersByDate(roomServiceRepo.returnAllCustomerServiceOrdersForOneDate(hotel.currentDate))   
+                domUpdates.displayAllRoomServiceOrdersByDate(roomServiceRepo.returnAllCustomerServiceOrdersForOneDate(hotel.currentDate))
             }
+        }
+
+        $('.search-to-pay-by-date-btn').on('click', calculateIndividualCustomerBalanceForOneDay);
+        $('.search-to-pay-by-date-btn').on('submit', calculateIndividualCustomerBalanceForOneDay);
+
+        function calculateIndividualCustomerBalanceForOneDay(e) {
+            e.preventDefault()
+            let inputValue = $('.search-room-service-to-pay-individual-input').val();
+
+            if(!inputValue || inputValue.length<10) {
+                domUpdates.displayDateErrorMsg()
+              } else {
+                  domUpdates.displayCustomerRoomServiceChargeForOneDay(roomServiceRepo.returnTotalAmountSpentOnRoomServicePerDateForOneCustomer(customer.id, inputValue))
+            }
+            $(".search-room-service-to-pay-individual-input").val('')
+        }
+        
+        
+        function calculateTotalBalancePerAllCustomerDates() {
+            if (roomServiceRepo.returnTotalAmountSpentOnRoomServiceForOneCustomerAllDAys(customer.id) === 0) {
+                $('.total-customer-balance-message').html('')
+            } else {
+                domUpdates.displayTotalBalanceAllDaysPerCustomer(roomServiceRepo.returnTotalAmountSpentOnRoomServiceForOneCustomerAllDAys(customer.id))
+            }
+
         }
 
     }
     
-    setTimeout(timer, 800);
+    setTimeout(timer, 500);
     
     
     

@@ -134,6 +134,7 @@ appendRemainingRoomsAfterFilter(rooms) {
 }, 
 
 showIndividualCustomersOrders(orders) {
+  $(".hotels-customer-service-message-per-date").addClass('hidden')
   $('.every-order-for-indivitual-customer').removeClass('hidden')
   $('.room-service-heads').removeClass('hidden')
   $('.every-order-for-indivitual-customer').html('')
@@ -157,7 +158,6 @@ displayNoCustomerServiceMessage() {
 
 displayAllRoomServiceOrdersByDate(allDates) {
   $(".hotels-customer-service-message-per-date").html("Here are the orders for the current date")
-  $('.customer-service-ul').html('')
   allDates.forEach (date => {
     $('.customer-service-ul').append(`<li class="align-horizontally">
       <p><span class="order-display">${date.date}</span></p> 
@@ -165,27 +165,31 @@ displayAllRoomServiceOrdersByDate(allDates) {
       <p><span class="price-display">${date.totalCost}</span></p>
     </li>`)  
   })
+}, 
+
+clearInputs() {
+  $('.every-order-for-indivitual-customer').html('')
+  $('.room-service-message').html('')
+  $('.room-service-heads').addClass('hidden')
+  $('.today-customer-balance-message').html('')
+}, 
+
+displayCustomerRoomServiceChargeForOneDay(amount) {
+  $('.today-customer-balance-message').html("Total balance for the selected date for this customer: " + amount +"$")
+}, 
+
+// displayNoInfoAmountPerCustomer() {
+//   $('.total-customer-balance-message').html('')
+//   // $('.today-customer-balance-message').html("No customer balance information for this date yet")
+// },
+
+displayTotalBalanceAllDaysPerCustomer(total) {
+  $('.verify-customer-room-service-balance').removeClass('hidden')
+  $('.room-service-form-for-balance').removeClass('hidden')
+  $('.total-customer-balance-message').html('')
+  $('.total-customer-balance-message').html("Total room service balance for this customer: " + total +"$")
 }
 
-// displayNewBooking(name, booking) {
-//   console.log("Name", name)
-//   console.log("Booking", booking)
-//   $('.room-booking-list-ul').append(`<li class="align-horizontally">
-//   <p class="room-booking-list room-date">${name}</p>
-//   <p class="room-booking-list room-date">${booking.date}</p>
-//   <p class="room-booking-list room-booking">${booking.roomNumber}</p>
-//   <div class="room-service-menu">
-//       <button>Order Room Service</button>
-//       <h2 class="room-service-menu">Menu</h2>
-//       <ul>
-//         <!-- <li class="align-horizontally">
-//           <p>Concrete sandwich</p>
-//           <p><span class="room-service-price"></span>$</p>
-//         </li> -->
-//       </ul>
-//     </div>
-// </li>`)
-// }
 
 
  //MAIN
@@ -217,10 +221,10 @@ displayAllRoomServiceOrdersByDate(allDates) {
 
 // ORDERS
 //GENERAL
-//Search input for all orders by DATE
+//Search input for all orders by DATE - DONE
 
 //BY CUSTOMER
-//breakdown of dates and orders for customer
+//breakdown of dates and orders for customer - DONE
 //total spent by date
 //total spent for all days
 //error if no orders found
