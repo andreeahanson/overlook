@@ -252,8 +252,9 @@ fetch('https://fe-apps.herokuapp.com/api/v1/overlook/1903/room-services/roomServ
             console.log("HEY!!!!!", roomServiceRepo.returnAllCustomerServiceOrdersForOneDate(inputValue).length)
             if(roomServiceRepo.returnAllCustomerServiceOrdersForOneDate(inputValue).length === 0){
                 domUpdates.displayNoCustomerServiceMessage()
+            } else {
+                domUpdates.displayAllRoomServiceOrdersByDate(roomServiceRepo.returnAllCustomerServiceOrdersForOneDate(inputValue));           
             }
-            domUpdates.displayAllRoomServiceOrdersByDate(roomServiceRepo.returnAllCustomerServiceOrdersForOneDate(inputValue));           
         }
         
         function checkForRoomService() {
