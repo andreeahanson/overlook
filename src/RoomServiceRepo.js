@@ -22,7 +22,7 @@ class RoomServiceRepo {
   }
 
   // displayTotalRoomServiceDetailsPerDate(orderDate) {
-  //   domUpdates.displayRoomServiceDetailsPerDate(this.returnAllCustomerServiceOrdersForOneDate(orderDate))
+  //   domUpdates.displayGlobalRoomServiceDetailsPerDate(this.returnAllCustomerServiceOrdersForOneDate(orderDate))
   // }
 
   returnTotalAmountSpentOnRoomServicePerDateForOneCustomer(userID, date) {

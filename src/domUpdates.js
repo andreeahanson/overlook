@@ -24,18 +24,6 @@ displayBookingDetailsPerDate(bookingInfo) {
   bookingInfo.forEach(room => $('.today-bookings').append(`<li class="room-number">Room: ${room.roomNumber}</li>`))
 },
 
-// displayRoomServiceDetailsPerDate(roomService) {
-//   console.log("WHAT??????")
-//   console.log(roomService)
-//   roomService.forEach(order => {
-//     $('.customer-service-ul').append(`<li class="align-horizontally">
-//   <p><span class="order-date-display">${order.date}</span></p> 
-//   <p><span class="order-food-display">${order.food}</span></p> 
-//   <p><span class="price-display">${order.totalCost}</span></p>
-// </li>`)  
-//   })
-// },
-
 displayErrorMsg() {
   alert('No guest by that name')
 },
@@ -157,6 +145,7 @@ displayNoCustomerServiceMessage() {
 
 
 displayAllRoomServiceOrdersByDate(allDates) {
+  $('.customer-service-ul').html('')
   $(".hotels-customer-service-message-per-date").html("Here are the orders for the current date")
   allDates.forEach (date => {
     $('.customer-service-ul').append(`<li class="align-horizontally">

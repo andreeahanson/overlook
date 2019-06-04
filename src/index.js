@@ -163,7 +163,6 @@ fetch('https://fe-apps.herokuapp.com/api/v1/overlook/1903/room-services/roomServ
         function searchAvailableRooms(e) {
             e.preventDefault()
             let inputValue = $(".search-date-input").val()
-            // let objs = bookingRepo.returnAvailableRooms(inputValue)
             if(!inputValue || inputValue.length<10) {
               domUpdates.displayDateErrorMsg()
             } else {
@@ -226,10 +225,10 @@ fetch('https://fe-apps.herokuapp.com/api/v1/overlook/1903/room-services/roomServ
             }
         }
 
-        $('.search-orders-by-date-btn').on('click', displayAllTodaysRoomServiceOrders);
-        $('.search-orders-by-date-btn').on('submit', displayAllTodaysRoomServiceOrders);
+        $('.search-orders-by-date-btn').on('click', displayAllRoomServiceOrdersPerDate);
+        $('.search-orders-by-date-btn').on('submit', displayAllRoomServiceOrdersPerDate);
 
-        function displayAllTodaysRoomServiceOrders(e) {
+        function displayAllRoomServiceOrdersPerDate(e) {
             e.preventDefault();
             let inputValue = $(".search-date-input-room-service").val()
             if(roomServiceRepo.returnAllCustomerServiceOrdersForOneDate(inputValue).length === 0){
@@ -272,6 +271,12 @@ fetch('https://fe-apps.herokuapp.com/api/v1/overlook/1903/room-services/roomServ
             }
 
         }
+
+    
+
+
+
+
 
     }
     
