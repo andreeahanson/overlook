@@ -109,6 +109,10 @@ describe('BookingRepo', function() {
       expect(bookingRepo.calculateNumberOfOccupiedRoomsByDate("07/02/2020")).to.equal(2);
     })
 
+    it('should calculate the percentage of occupied rooms based on the date', function() {
+      expect(bookingRepo.calculateOccupationPercentageForDate("07/02/2020")).to.equal(50);
+    })
+
     it('should return the available rooms based on the date', function() {
       expect(bookingRepo.returnAvailableRooms("17/07/2019")).to.eql([{
         number: 1,

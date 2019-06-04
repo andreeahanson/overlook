@@ -156,6 +156,18 @@ displayAllRoomServiceOrdersByDate(allDates) {
   })
 }, 
 
+displayOnMainTabAllRoomServiceOrdersByDate(allDates) {
+  $('.today-orders').html('')
+  allDates.forEach (date => {
+    $('.today-orders').append(`<li class="align-horizontally">
+      <p><span class="order-display">${date.date}</span></p> 
+      <p><span class="order-display">${date.food}</span></p> 
+      <p><span class="price-display">${date.totalCost}</span></p>
+    </li>`)  
+  })
+},
+
+
 clearInputs() {
   $('.every-order-for-indivitual-customer').html('')
   $('.room-service-message').html('')
@@ -194,7 +206,7 @@ displayTotalBalanceAllDaysPerCustomer(total) {
   //Search input for customer by name - DONE
   //button to search and make enter work - DONE
   //input to create a new customer - DONE
-  //Update all tabs to include info for that user
+  //Update all tabs to include info for that user - DONE
 
   //ROOMS
   //GENERAL
@@ -206,7 +218,7 @@ displayTotalBalanceAllDaysPerCustomer(total) {
 //Book a room button- DONE
 //Drop down menu with all available room types -DONE
 //if not available display room types that are available - DONE
-//Once booked - Order room service button
+//Once booked - Order room service button - DONE
 
 // ORDERS
 //GENERAL
@@ -214,9 +226,9 @@ displayTotalBalanceAllDaysPerCustomer(total) {
 
 //BY CUSTOMER
 //breakdown of dates and orders for customer - DONE
-//total spent by date
-//total spent for all days
-//error if no orders found
+//total spent by date - DONE
+//total spent for all days - DONE
+//error if no orders found - DONE
 
 }
 

@@ -12,6 +12,10 @@ class BookingRepo {
     return this.bookingData.filter(room => room.date === date).length
   }
 
+  calculateOccupationPercentageForDate(date) {
+    return this.calculateNumberOfOccupiedRoomsByDate(date)/this.totalRooms * 100
+  }
+
   
   returnAvailableRooms(date) {
     let bookingsByDate = this.bookingData.filter(book => book.date === date).map(el => el.roomNumber)
@@ -19,17 +23,10 @@ class BookingRepo {
     return availableRooms
   }
   
-  // displayAvailableRooms(date) {
-  //   domUpdates.displayAvailableRoomsByDate(returnAvailableRooms(date))
-  // }
 
   returnBookingDetailsByDate(date) {
     return this.bookingData.filter(room => room.date === date)
   }
-
-  // displayBookedRooms() {
-  //   domUpdates.displayBookingDetailsPerDate(this.returnBookingDetailsByDate(date))
-  // }
 
   calculateAvailableRoomsByDate(date) {
     let availableRooms = this.totalRooms - this.bookingData.filter(room => room.date === date).length;
@@ -44,10 +41,6 @@ class BookingRepo {
   filterTodayAvailableRoomsByType(date, type) {
     return this.returnAvailableRooms(date).filter(room => room.roomType === type)
   }
-
-  // filterRoomsByDateAndType() {
-  //   domUpdates.filterAllRoomsByDateAndType(filterTodayAvailableRoomsByType(date, type))
-  // }
 
 
   addNewBooking() {
@@ -70,10 +63,6 @@ class BookingRepo {
     return mostPopularDate
   }
 
-  // displayMostPopularDate() {
-  //   domUpdates.displayHotelsMostPopularDate(showMostPopularBookingDate);
-  // }
-
   showLeastPopularBookingDate() {
     let dates = this.bookingData.map(book => book.date)
     let nonPopularDate = dates.reduce((acc, date) => {
@@ -83,10 +72,6 @@ class BookingRepo {
     let leastPopularDate = Object.entries(nonPopularDate).sort((a, b) => a[1] - b[1]).shift()[0]
     return leastPopularDate
   } 
-
-  // displayLeastPopularDate() {
-  //   domUpdates.displayHotelsLeastPopularDate(showLeastPopularBookingDate);
-  // }
   
   showCustomersBookings(customerID) {
     return this.bookingData.filter(book => book.userID === customerID);
