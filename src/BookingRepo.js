@@ -77,6 +77,10 @@ class BookingRepo {
     return this.bookingData.filter(book => book.userID === customerID);
   }
 
+  // showCustomersBookingsByDate(customerID, date) {
+  //   return this.bookingData.filter(book => book.userID === customerID && book.date === date)
+  // }
+
   returnTotalBookingBalanceForOneCustomerAllDAys(customerID) {
     let balance = this.showCustomersBookings(customerID).reduce((total, booking) => {
       this.roomData.forEach(room => {
@@ -124,7 +128,6 @@ class BookingRepo {
   
   
   upgradeRoom (customerID, date) {
-    
     let singleRooms = this.roomData.filter(room => room.roomType === "single room").map(room => room.number)
     let juniorSuites = this.roomData.filter(room => room.roomType === "junior suite").map(room => room.number)
     let suites = this.roomData.filter(room => room.roomType === "suite").map(room => room.number)
@@ -150,9 +153,8 @@ class BookingRepo {
       type: "residential suite",
       roomNumbers: residentialSuites
     }
-
+    
     let sortedRoomNumbers = [singleRoom, juniorSuite, suite, residentialSuite]
-
     let match = this.bookingData.filter(book => book.userID === customerID && book.date === date).reduce((acc, bookingA) => {
       sortedRoomNumbers.forEach((roomType, index) => {
         if (roomType.roomNumbers.includes(bookingA.roomNumber) && sortedRoomNumbers[index].count <= 3){
@@ -169,8 +171,6 @@ class BookingRepo {
       return acc
     }, {})
     return match
-    
-
   }
 
   

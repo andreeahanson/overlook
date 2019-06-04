@@ -249,6 +249,15 @@ describe('BookingRepo', function() {
         roomNumber: 2
         }]);
   })
+
+  // it('should show all of a customer\'s bookings by date', function() {
+  //   expect(bookingRepo.showCustomersBookingsByDate(83, "19/01/2020")).to.eql([
+  //     {
+  //       userID: 83,
+  //       date: "19/01/2020",
+  //       roomNumber: 2
+  //       }]);
+  // })
   
   it('should calculate the total amount a customer has to pay for all their bookings', function() {
     expect(bookingRepo.returnTotalBookingBalanceForOneCustomerAllDAys(83)).to.equal(807.28);

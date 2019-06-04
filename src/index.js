@@ -278,10 +278,19 @@ fetch('https://fe-apps.herokuapp.com/api/v1/overlook/1903/room-services/roomServ
 
         }
 
-    
+         $('#tab-3').on('click', upgradeBooking)
+         $('#tab-3').on('submit', upgradeBooking)
 
-
-
+        function upgradeBooking(event) {
+            event.preventDefault;
+            let matchingDate = $(event.target).attr('class').split(' ')[1]
+            if($(event.target).is('.upgrade-button') ){
+                bookingRepo.upgradeRoom(customer.id, matchingDate)
+                domUpdates.displayAllOnesCustomerBookings(bookingRepo.showCustomersBookings(customer.id))
+                calculateTotalBalancePerAllCustomerDates();
+                domUpdates.displayRevenueToday(hotel.calculateOverallBalancePerDate(hotel.currentDate))
+            }
+        }
 
 
     }
