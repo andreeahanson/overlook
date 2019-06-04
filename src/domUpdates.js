@@ -17,10 +17,12 @@ displayOccupancy(occupancy) {
 }, 
 
 displayRevenueToday(revenue) {
+  $('.total-revenue-today').html('')
   $('.total-revenue-today').html(revenue)
 },
 
 displayBookingDetailsPerDate(bookingInfo) {
+  $('.today-bookings').html('')
   bookingInfo.forEach(room => $('.today-bookings').append(`<li class="room-number">Room: ${room.roomNumber}</li>`))
 },
 
@@ -30,6 +32,11 @@ displayErrorMsg() {
 
 displayName(name) {
   $('.selected-customer').html(name.name)
+},
+
+displayCustomerTotalBill(amount) {
+  $('.bill').html('')
+  $('.bill').html('Total Bill: ' + amount + '$')
 },
 
 displayNoBookingsMessage() {

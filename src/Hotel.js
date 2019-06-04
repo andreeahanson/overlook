@@ -1,9 +1,10 @@
 import domUpdates from "./domUpdates";
 
 class Hotel {
-  constructor(bookingRepo) {
+  constructor(bookingRepo, roomServiceRepo) {
     this.currentDate = this.showTodaysDate();
     this.bookingRepo = bookingRepo;
+    this.roomServiceRepo = roomServiceRepo;
   }
 
   showTodaysDate() {
@@ -14,9 +15,15 @@ class Hotel {
     return today = dd + '/' + mm + '/' + yyyy;
   }
 
-  // to add revenue from room service
-  
+  calculateOverallBalancePerDate(date) {
+    let overallHotelBalancePerDate = this.bookingRepo.showTotalBookingRevenueToday(date) + this.roomServiceRepo.returnTotalAmountSpentOnRoomServicePerDateForAllCustomers(date)
+    return overallHotelBalancePerDate;
+  }
 
+  calculateATotalBillForOneCustomer(customerID) {
+    let totalBill = this.bookingRepo.returnTotalBookingBalanceForOneCustomerAllDAys(customerID) + this.roomServiceRepo.returnTotalAmountSpentOnRoomServiceForOneCustomerAllDAys(customerID)
+    return totalBill
+}
 
 }
 
