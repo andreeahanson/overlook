@@ -129,10 +129,10 @@ appendRemainingRoomsAfterFilter(rooms) {
 }, 
 
 showIndividualCustomersOrders(orders) {
+  $('.every-order-for-indivitual-customer').html('')
   $(".hotels-customer-service-message-per-date").addClass('hidden')
   $('.every-order-for-indivitual-customer').removeClass('hidden')
   $('.room-service-heads').removeClass('hidden')
-  $('.every-order-for-indivitual-customer').html('')
   $('.room-service-message').html('Here are this customer\'s orders')
   orders.forEach(order => {
     $('.every-order-for-indivitual-customer').append(`<li class="align-horizontally">
