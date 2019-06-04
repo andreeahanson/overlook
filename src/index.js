@@ -70,21 +70,20 @@ fetch('https://fe-apps.herokuapp.com/api/v1/overlook/1903/room-services/roomServ
         roomServiceRepo = new RoomServiceRepo (roomServiceData, customer)
         domUpdates.showCurrentDate(hotel.currentDate);
         domUpdates.displayAvailability(hotel.bookingRepo.calculateAvailableRoomsByDate(hotel.currentDate))
-        domUpdates.displayOccupancy(hotel.bookingRepo.calculateNumberOfOccupiedRoomsByDate(hotel.currentDate))
+        domUpdates.displayOccupancy(hotel.bookingRepo.calculateOccupationPercentageForDate(hotel.currentDate))
         domUpdates.displayRevenueToday(bookingRepo.showTotalBookingRevenueToday(hotel.currentDate))
         domUpdates.displayBookingDetailsPerDate(bookingRepo.returnBookingDetailsByDate(hotel.currentDate))
         domUpdates.displayHotelsMostPopularDate(bookingRepo.showMostPopularBookingDate());
         domUpdates.displayHotelsLeastPopularDate(bookingRepo.showLeastPopularBookingDate());
+        domUpdates.displayOnMainTabAllRoomServiceOrdersByDate(roomServiceRepo.returnAllCustomerServiceOrdersForOneDate(hotel.currentDate))
         checkForRoomService()
-
-
+        checkOccupancy();
 
         function checkOccupancy() {
-            if (hotel.bookingRepo.calculateNumberOfOccupiedRoomsByDate(hotel.currentDate) === 0) {
+            if (hotel.bookingRepo.calculateOccupationPercentageForDate(hotel.currentDate) === 0) {
                 $('.book-a-room-btn').removeClass('hidden')
             }
         }
-        checkOccupancy();
         
         $('.book-a-room-btn').on('click', showRoomTypesInput)
         $('.book-a-room-btn').on('submit', showRoomTypesInput)
@@ -192,13 +191,14 @@ fetch('https://fe-apps.herokuapp.com/api/v1/overlook/1903/room-services/roomServ
                     if ($('.selected-customer').html() !== "" && e.target.matches('#book-btn-today')){
                         booking = new Booking (customer.id, hotel.currentDate, value)
                         bookingData.push(booking)
-                        console.log(bookingRepo.returnAvailableRooms(hotel.currentDate).length)
                         domUpdates.displayAvailability(bookingRepo.returnAvailableRooms(hotel.currentDate).length)
                         let name = $('.selected-customer').html();
                         domUpdates.displayAllOnesCustomerBookings(customerRepo.findOneCustomersBookings(customer.name))
                     }
                     e.target.closest('li').remove();
                     $('.order-room-service-btn').removeClass('hidden')
+                    domUpdates.displayOccupancy(hotel.bookingRepo.calculateOccupationPercentageForDate(hotel.currentDate))
+                    domUpdates.displayBookingDetailsPerDate(bookingRepo.returnBookingDetailsByDate(hotel.currentDate))
                 }
         }
 
@@ -222,6 +222,7 @@ fetch('https://fe-apps.herokuapp.com/api/v1/overlook/1903/room-services/roomServ
                 calculateTotalBalancePerAllCustomerDates()
                 domUpdates.showIndividualCustomersOrders(roomServiceRepo.returnCustomerServiceOrdersForOneCustomer(customer.id))
                 domUpdates.displayTotalBalanceAllDaysPerCustomer(roomServiceRepo.returnTotalAmountSpentOnRoomServiceForOneCustomerAllDAys(customer.id))
+                domUpdates.displayOnMainTabAllRoomServiceOrdersByDate(roomServiceRepo.returnAllCustomerServiceOrdersForOneDate(hotel.currentDate))
             }
         }
 
