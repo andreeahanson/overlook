@@ -43,7 +43,7 @@
           <div class="customer-service general-info"">
               <form class="customer-service-form">
                 <input type="text" placeholder="dd/mm/yyyy" class="search-date-input-room-service">
-                <button class="search-orders-by-date-btn">Search rooms by date</button>
+                <button class="search-orders-by-date-btn">Search orders by date</button>
               </form>
               <ul class="customer-service-ul">
                 <div class="align-horizontally">
@@ -54,16 +54,6 @@
               </ul>
             </div>
 
-
-        <h2>Date: <span class="room-service-amount">100</span>$</h2>
-        <h2>Date: <span class="room-service-amount">100</span>$</h2>
-        <h2>Date: <span class="room-service-amount">100</span>$</h2>
-        <h2>Overall: <span class="room-service-overall-amount">300</span>$</h2>
-        <h2>Today's orders</h2>
-        <form>
-          <input type="text" placeholder="search-orders-by-date">
-          <button>Search</button>
-        </form>
         <h2 class="room-service-message"></h2>
         <div class="align-horizontally room-service-heads hidden">
             <p>Date</p> 
@@ -71,7 +61,16 @@
             <p>Price</p>
           </div>
           <ul class="every-order-for-indivitual-customer align-horizontally hidden"></ul>
-      </div>
+          
+          <h2 class="verify-customer-room-service-balance hidden">Verify customer's balance by date</h2>
+          <form class="room-service-form-for-balance hidden">
+            <input type="text" placeholder="dd/mm/yyyy" class="search-room-service-to-pay-individual-input">
+            <button class="search-to-pay-by-date-btn">Calculate payment per date</button>
+          </form>
+          <h2 class="today-customer-balance-message"></h2>
+          <h2 class="total-customer-balance-message"></h2>
+        </div>
+
       <div id="tab-3" class="tab-content">
           <div class="align-horizontally one-customers-bookings hidden">
               <div class="align-vertically">
@@ -155,26 +154,6 @@
         </div>
 
         
-        <!-- <h2>Client's new booking</h2>
-        <ul class="room-booking-list-ul">
-          <li class="align-horizontally">
-            <p class="room-booking-list room-client-name">Name</p>
-            <p class="room-booking-list room-date">Date</p>
-            <p class="room-booking-list room-booking">Room</p>
-            <div class="room-service-menu hidden">
-                <button>Order Room Service</button>
-                <h2>Menu</h2>
-                <ul>
-                  <!-- <li class="align-horizontally">
-                    <p>Concrete sandwich</p>
-                    <p><span class="room-service-price"></span>$</p>
-                  </li> -->
-                <!-- </ul>
-              </div>
-          </li> -->
-        <!-- </ul>  -->
-
-
 
       </div>
       <div id="tab-4" class="tab-content">
