@@ -1,6 +1,8 @@
 var chai = require('chai');
 var expect = chai.expect;
 import Hotel from '../src/Hotel';
+import Customer from '../src/Customer';
+import RoomServiceRepo from '../src/RoomServiceRepo';
 
 import spies from 'chai-spies';
 import Room from '../src/Room';
@@ -34,7 +36,7 @@ const bookingRepoSampleData = [
   {
   userID: 83,
   date: "15/01/2020",
-  roomNumber: 118
+  roomNumber: 1
   },
   {
   userID: 61,
@@ -44,7 +46,7 @@ const bookingRepoSampleData = [
   {
     userID: 83,
     date: "19/01/2020",
-    roomNumber: 120
+    roomNumber: 2
     },
 
   {
@@ -87,13 +89,55 @@ const bookingRepoSampleData = [
     costPerNight: 192.48
     }];
 
+    const roomServiceSampleData = [
+      {
+      userID: 34,
+      date: "21/10/2019",
+      food: "Generic Plastic Sandwich",
+      totalCost: 9.48
+      },
+      {
+      userID: 37,
+      date: "24/12/2019",
+      food: "Generic Soft Sandwich",
+      totalCost: 24.24
+      },
+      {
+      userID: 83,
+      date: "15/01/2020",
+      food: "Tasty Fresh Sandwich",
+      totalCost: 13.07
+      },
+      {
+      userID: 22,
+      date: "01/01/2020",
+      food: "Rustic Soft Sandwich",
+      totalCost: 18.63
+      },
+      {
+      userID: 90,
+      date: "09/01/2020",
+      food: "Sleek Concrete Sandwich",
+      totalCost: 15.97
+      },
+      {
+      userID: 98,
+      date: "19/07/2019",
+      food: "Rustic Wooden Sandwich",
+      totalCost: 5.86
+      }];
+
 describe('Hotel', function() {
     let bookingRepo
+    let customer
+    let roomServiceRepo
     let hotel;
 
   beforeEach(function() {
     bookingRepo = new BookingRepo(bookingRepoSampleData, roomDataSample);
-    hotel = new Hotel(bookingRepo);
+    customer = new Customer(4, "Milo Ankunding");
+    roomServiceRepo = new RoomServiceRepo(roomServiceSampleData, customer);
+    hotel = new Hotel(bookingRepo, roomServiceRepo);
   });
 
     it('should be a function', function() {
@@ -104,10 +148,12 @@ describe('Hotel', function() {
       expect(hotel).to.be.an.instanceof(Hotel);
     })
 
-    it.skip('should show the current date', function() {
-      expect(hotel.currentDate).to.equal("31/05/2019");
+    it('should calculate the overal total balance per one date', function() {
+      expect(hotel.calculateOverallBalancePerDate("15/01/2020")).to.equal(357.65);
     })
 
-    
+    it('should calculate the total bill for one customer for all services for all dates', function() {
+      expect(hotel.calculateATotalBillForOneCustomer(83)).to.equal(820.35);
+    })
     
 });

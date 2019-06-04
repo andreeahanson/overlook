@@ -33,7 +33,7 @@ const bookingRepoSampleData = [
   {
   userID: 83,
   date: "15/01/2020",
-  roomNumber: 118
+  roomNumber: 1
   },
   {
   userID: 61,
@@ -43,7 +43,7 @@ const bookingRepoSampleData = [
   {
     userID: 83,
     date: "19/01/2020",
-    roomNumber: 120
+    roomNumber: 2
     },
 
   {
@@ -161,7 +161,7 @@ describe('BookingRepo', function() {
         }]);
     })
 
-    it('should return the detais of the occupied rooms based on the date', function() {
+    it('should return the details of the occupied rooms based on the date', function() {
       expect(bookingRepo.returnBookingDetailsByDate("07/02/2020")).to.eql([{
         userID: 61,
         date: "07/02/2020",
@@ -225,17 +225,27 @@ describe('BookingRepo', function() {
     expect(bookingRepo.showCustomersBookings(83)).to.eql([{
       userID: 83,
       date: "15/01/2020",
-      roomNumber: 118
+      roomNumber: 1
       },
       {
         userID: 83,
         date: "19/01/2020",
-        roomNumber: 120
+        roomNumber: 2
         }]);
   })
   
+  it('should calculate the total amount a customer has to pay for all their bookings', function() {
+    expect(bookingRepo.returnTotalBookingBalanceForOneCustomerAllDAys(83)).to.equal(807.28);
+  })
+
+  it('should calculate the total amount a customer has to pay for one day for booking', function() {
+    expect(bookingRepo.returnBookingBalanceForOneCustomerPerDay(83, "15/01/2020")).to.equal(344.58);
+  })
+
+
   it('should return the requested info for a customer, or a message saying there is no data for that customer', function() {
     expect(bookingRepo.noDataMessage(24)).to.equal("No data for this customer");
   })
+
     
 });

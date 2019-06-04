@@ -107,6 +107,5 @@ describe('RoomServiceRepo', function() {
     it('should calculate the total amount spent on roomService by all customers per date', function() {
       expect(roomServiceRepo.returnTotalAmountSpentOnRoomServicePerDateForAllCustomers("09/01/2020")).to.equal(15.97);
     })
-
     
 });

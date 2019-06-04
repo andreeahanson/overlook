@@ -64,18 +64,18 @@ fetch('https://fe-apps.herokuapp.com/api/v1/overlook/1903/room-services/roomServ
             $(this).addClass('current');
             $("#"+tab_id).addClass('current');
         })
-        bookingRepo = new BookingRepo (bookingData, roomData)
-        hotel = new Hotel(bookingRepo);
-        customerRepo = new CustomerRepo (customerData, bookingData);
-        roomServiceRepo = new RoomServiceRepo (roomServiceData, customer)
+        bookingRepo = new BookingRepo(bookingData, roomData)
+        customerRepo = new CustomerRepo(customerData, bookingData);
+        roomServiceRepo = new RoomServiceRepo(roomServiceData, customer)
+        hotel = new Hotel(bookingRepo, roomServiceRepo);
         domUpdates.showCurrentDate(hotel.currentDate);
         domUpdates.displayAvailability(hotel.bookingRepo.calculateAvailableRoomsByDate(hotel.currentDate))
         domUpdates.displayOccupancy(hotel.bookingRepo.calculateOccupationPercentageForDate(hotel.currentDate))
-        domUpdates.displayRevenueToday(bookingRepo.showTotalBookingRevenueToday(hotel.currentDate))
         domUpdates.displayBookingDetailsPerDate(bookingRepo.returnBookingDetailsByDate(hotel.currentDate))
         domUpdates.displayHotelsMostPopularDate(bookingRepo.showMostPopularBookingDate());
         domUpdates.displayHotelsLeastPopularDate(bookingRepo.showLeastPopularBookingDate());
         domUpdates.displayOnMainTabAllRoomServiceOrdersByDate(roomServiceRepo.returnAllCustomerServiceOrdersForOneDate(hotel.currentDate))
+        domUpdates.displayRevenueToday(hotel.calculateOverallBalancePerDate(hotel.currentDate))
         checkForRoomService()
         checkOccupancy();
 
@@ -132,6 +132,7 @@ fetch('https://fe-apps.herokuapp.com/api/v1/overlook/1903/room-services/roomServ
                 domUpdates.showIndividualCustomersOrders(roomServiceRepo.returnCustomerServiceOrdersForOneCustomer(customer.id))
             }
             calculateTotalBalancePerAllCustomerDates()
+            domUpdates.displayCustomerTotalBill(hotel.calculateATotalBillForOneCustomer(customer.id))
           }
 
         function addGuest(e) {
@@ -156,7 +157,7 @@ fetch('https://fe-apps.herokuapp.com/api/v1/overlook/1903/room-services/roomServ
             calculateTotalBalancePerAllCustomerDates()
             $(".add-customer-input").val('')
             $('.book-a-room-btn').removeClass('hidden')
-
+            domUpdates.displayCustomerTotalBill(hotel.calculateATotalBillForOneCustomer(customer.id))
           }
         
         function searchAvailableRooms(e) {
@@ -199,6 +200,8 @@ fetch('https://fe-apps.herokuapp.com/api/v1/overlook/1903/room-services/roomServ
                     $('.order-room-service-btn').removeClass('hidden')
                     domUpdates.displayOccupancy(hotel.bookingRepo.calculateOccupationPercentageForDate(hotel.currentDate))
                     domUpdates.displayBookingDetailsPerDate(bookingRepo.returnBookingDetailsByDate(hotel.currentDate))
+                    domUpdates.displayRevenueToday(hotel.calculateOverallBalancePerDate(hotel.currentDate))
+                    domUpdates.displayCustomerTotalBill(hotel.calculateATotalBillForOneCustomer(customer.id))
                 }
         }
 
@@ -223,6 +226,8 @@ fetch('https://fe-apps.herokuapp.com/api/v1/overlook/1903/room-services/roomServ
                 domUpdates.showIndividualCustomersOrders(roomServiceRepo.returnCustomerServiceOrdersForOneCustomer(customer.id))
                 domUpdates.displayTotalBalanceAllDaysPerCustomer(roomServiceRepo.returnTotalAmountSpentOnRoomServiceForOneCustomerAllDAys(customer.id))
                 domUpdates.displayOnMainTabAllRoomServiceOrdersByDate(roomServiceRepo.returnAllCustomerServiceOrdersForOneDate(hotel.currentDate))
+                domUpdates.displayRevenueToday(hotel.calculateOverallBalancePerDate(hotel.currentDate))
+                domUpdates.displayCustomerTotalBill(hotel.calculateATotalBillForOneCustomer(customer.id))
             }
         }
 
@@ -281,7 +286,7 @@ fetch('https://fe-apps.herokuapp.com/api/v1/overlook/1903/room-services/roomServ
 
     }
     
-    setTimeout(timer, 500);
+    setTimeout(timer, 400);
     
     
     

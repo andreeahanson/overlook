@@ -77,6 +77,33 @@ class BookingRepo {
     return this.bookingData.filter(book => book.userID === customerID);
   }
 
+  returnTotalBookingBalanceForOneCustomerAllDAys(customerID) {
+    let balance = this.showCustomersBookings(customerID).reduce((total, booking) => {
+      this.roomData.forEach(room => {
+        if(room.number === booking.roomNumber) {
+          total +=room.costPerNight
+        }
+      })
+      return total
+    }, 0)
+    return balance
+  }
+
+
+  returnBookingBalanceForOneCustomerPerDay(customerID, date) {
+    let balancePerDate = this.showCustomersBookings(customerID).filter(book => book.date === date).reduce((total, booking) => {
+      this.roomData.forEach(room => {
+        if(room.number === booking.roomNumber) {
+          total += room.costPerNight
+        }
+      })
+      return total
+    }, 0)
+    return balancePerDate
+  }
+
+
+
   noDataMessage(customerID) {
     if (this.bookingData.filter(book => book.userID === customerID).length === 0){
       return "No data for this customer"
@@ -94,6 +121,8 @@ class BookingRepo {
     }, 0)
     return bookingCash;
   } 
+
+  
 
 }
 
