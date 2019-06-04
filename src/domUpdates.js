@@ -148,8 +148,10 @@ showIndividualCustomersOrders(orders) {
 }, 
 
 displayNoCustomerServiceMessage() {
+  $('.customer-service-ul').html('')
   $(".hotels-customer-service-message-per-date").removeClass('hidden')
   $(".hotels-customer-service-message-per-date").html("No orders for current date")
+  $(".search-date-input-room-service").val('')
 },
 
 
