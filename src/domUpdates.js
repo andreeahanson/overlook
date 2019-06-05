@@ -161,6 +161,7 @@ displayAllRoomServiceOrdersByDate(allDates) {
       <p><span class="price-display">${date.totalCost}</span></p>
     </li>`)  
   })
+  $(".search-date-input-room-service").val('')
 }, 
 
 displayOnMainTabAllRoomServiceOrdersByDate(allDates) {
@@ -176,10 +177,16 @@ displayOnMainTabAllRoomServiceOrdersByDate(allDates) {
 
 
 clearInputs() {
+  console.log("HIDE")
   $('.every-order-for-indivitual-customer').html('')
   $('.room-service-message').html('')
   $('.room-service-heads').addClass('hidden')
   $('.today-customer-balance-message').html('')
+  $('.general-info').addClass('hidden')
+  $('.order-room-service-btn').addClass('hidden')
+  $('.order-room-service').addClass('hidden')
+  $('.rooms-by-type').addClass('hidden')
+  $('.book-a-room-btn').addClass('hidden')
 }, 
 
 displayCustomerRoomServiceChargeForOneDay(amount) {
