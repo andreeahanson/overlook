@@ -8,8 +8,8 @@
     <h1>Over<span class='title'>Look</span></h1>
     <hr>
     <div class="align-horizontally to-date">
+      <h2 class="selected-customer"></h2>
     <h2 class="date">00/00/0000</h2>
-    <h2 class="selected-customer"></h2>
     </div>
   </header>
   <main>
@@ -25,16 +25,29 @@
       <!-- TAB MAIN -->
       <div id="tab-1" class="tab-content current">
           <h2>Total available rooms today: <span class="available-rooms">#</span></h2>
-          <br><hr>
           <h2>Total expected revenue today: <span class="total-revenue-today">#</span>$</h2>
-          <br><hr>
           <h2>Total rooms occupied today: <span class="occupation-rate"></span>%</h2>
           <br><hr>
+          <article class="scroll-short">
           <h2>Today's bookings: </h2>
           <ul class="today-bookings"></ul>
           <br><hr>
           <h2>Today's orders: </h2>
-          <ul class="today-orders"></ul>
+
+          <table id="t07" class="today-orders">
+              <tr>
+                <th>Date</th>
+                <th>Item ordered</th> 
+                <th>Price</th>
+              </tr>
+              <tbody>
+            </tbody>
+            </table>
+          </article>
+
+
+
+          <!-- <ul class="today-orders"></ul> -->
       </div>
 
       <!-- TAB ORDERS -->
@@ -317,13 +330,13 @@
       <div id="tab-4" class="tab-content">
         <h2>Search for customer</h2>
         <form for="search-customer">
-          <input type="text" class="guest-search-input" placeholder="Search Customer">
-          <button class="guest-search-button">Search</button>
+          <input type="text" class="guest-search-input inpt" placeholder="first_name last_name">
+          <button class="guest-search-button btn">Search</button>
         </form>
         <h2>Add new customer</h2>
         <form for="add-customer">
-          <input type="list" placeholder="first_name last_name" class="add-customer-input">
-          <button class="add-customer-button">Add customer</button>
+          <input type="list" placeholder="first_name last_name" class="add-customer-input inpt">
+          <button class="add-customer-button btn">Add customer</button>
         </form>
        <h2 class="bill"></h2>
       </div>

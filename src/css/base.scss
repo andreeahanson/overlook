@@ -1,5 +1,5 @@
 /* This is an example of using Sass, otherwise plain CSS works too*/
-$primary-background: rgb(250, 250, 250);
+$primary-background: #b2c2bf;
 $table-color: orange;
 
 @mixin tab-guidelines($tab-height) {
@@ -27,14 +27,16 @@ $table-color: orange;
 
 body {
   background-color: $primary-background;
+  font-family: 'Trebuchet MS', serif;
 }
 
 .title {
-  color: rgb(211, 99, 99);
+  color: rgb(202, 103, 10);
 }
 
 h1 {
   margin: 0;
+  font-size: 40px;
 }
 
 hr {
@@ -43,9 +45,19 @@ hr {
 
 h2,
 .date {
-  font-size: 15px;
+  font-size: 18px;
 }
 
+.align-horizontally{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+}
+
+.scroll-short{
+  max-height: 350px;
+  overflow: scroll;
+}
 
 section{
 			margin-top: 100px;
@@ -57,7 +69,7 @@ section{
       background-color: orange;
       align-self: center;
       margin: 0;
-      @include tab-guidelines(80vh)
+      @include tab-guidelines(80vh);
     }
 
 		ul.tabs{
@@ -69,24 +81,31 @@ section{
 			background: none;
 			color: #222;
 			display: inline-block;
-			padding: 10px 15px;
+      padding: 10px 15px;
+      height: 30px;
+      font-size: 18px;
 			cursor: pointer;
 		}
 
 		ul.tabs li.current{
 			background: #ededed;
-			color: #222;
+      color: #222;
+      height:30px;
 		}
 
 		.tab-content{
 			display: none;
 			background: #ededed;
       padding: 15px;
-      @include tab-guidelines(80vh)
+      @include tab-guidelines(80vh);
 		}
 
 		.tab-content.current{
 			display: inherit;
+    }
+
+    .tab-link {
+      width: 100px;
     }
     
     .hidden {
@@ -102,6 +121,35 @@ section{
   }
   li {
     list-style: none;
+  }
+
+  table {
+    margin-top: 30px;
+    width:100%;
+  }
+  table, th, td {
+    border: 1px solid black;
+    border-collapse: collapse;
+  }
+  th, td {
+    padding: 15px;
+    text-align: center;
+  }
+  table#t07 tr:nth-child(even){
+    background-color: #eee;
+  }
+  table#t07 tr:nth-child(odd){
+  background-color: #fff;
+  }
+  table#t07 th{
+    background-color: $table-color;
+    color: white;
+  }
+  .inpt{
+    @include input-format();
+  }
+  .btn{
+    @include button-format();
   }
   
 }
@@ -123,10 +171,10 @@ section{
     display: flex;
     flex-direction: row;
     .search-date-input-room-service{
-      @include input-format()
+      @include input-format();
     }
     .btn{
-      @include button-format()
+      @include button-format();
     }
   }
 
@@ -237,7 +285,7 @@ section{
   }
 
   #room-type-list{
-    @include input-format()
+    @include input-format();
     margin-top: 20px;
   }
 
@@ -263,8 +311,27 @@ section{
   .buy-items{
     max-height: 80px;
   }
-
 }
+
+// TAB CUSTOMER
+
+#tab-4{
+  h2 {
+    font-size: 18px;
+    border-radius: 2%;
+  }
+  .btn{
+    @include button-format();
+  }
+  .inpt{
+    @include input-format();
+  }
+}
+
+
+
+
+
 
 
 
