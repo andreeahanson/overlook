@@ -29,7 +29,7 @@ npm start
 Then, go to http://localhost:8080/ in your browser to see the code running in the browser.
 
 ## Screenshots
-![]Screen Shot 2019-06-05 at 04.48.38
+![] [Screen Shot 2019-06-05 at 04.48.38]
 
 ## Learning Goals
 
