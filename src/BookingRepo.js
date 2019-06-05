@@ -1,5 +1,4 @@
 import Booking from "./Booking";
-import domUpdates from "./domUpdates"
 
 class BookingRepo {
   constructor(bookingData, roomData){
@@ -30,7 +29,6 @@ class BookingRepo {
 
   calculateAvailableRoomsByDate(date) {
     let availableRooms = this.totalRooms - this.bookingData.filter(room => room.date === date).length;
-    domUpdates.displayAvailability(availableRooms)
     return availableRooms
   }
 
@@ -76,10 +74,6 @@ class BookingRepo {
   showCustomersBookings(customerID) {
     return this.bookingData.filter(book => book.userID === customerID);
   }
-
-  // showCustomersBookingsByDate(customerID, date) {
-  //   return this.bookingData.filter(book => book.userID === customerID && book.date === date)
-  // }
 
   returnTotalBookingBalanceForOneCustomerAllDAys(customerID) {
     let balance = this.showCustomersBookings(customerID).reduce((total, booking) => {
@@ -163,7 +157,6 @@ class BookingRepo {
           let increase = this.filterTodayAvailableRoomsByType(date, plus)[0]
           let numberT = increase.number
           let booking = new Booking(customerID, date, numberT)
-          console.log(booking)
           this.bookingData.push(booking)
           acc = booking
         } 

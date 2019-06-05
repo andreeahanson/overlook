@@ -137,6 +137,7 @@ fetch('https://fe-apps.herokuapp.com/api/v1/overlook/1903/room-services/roomServ
 
         function addGuest(e) {
             e.preventDefault()
+            domUpdates.displayNewName(customer.name)
             let inputValue = $(".add-customer-input").val()
             customer = new Customer(Date.now(), inputValue)           
             customerData.push(customer);

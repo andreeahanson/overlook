@@ -268,10 +268,8 @@ section{
     padding: 5px;
   }
 
-
   .book-a-room-btn{
     margin: 0px;
-    background: rgb(194, 166, 180);
   }
 
   .rooms-by-type{
@@ -279,7 +277,7 @@ section{
   }
 
   .scroll{
-    max-height: 300px;
+    max-height: 400px;
     overflow-y: scroll;
   }
 
@@ -292,6 +290,10 @@ section{
     max-height: 90px;
     overflow: scroll;
     padding: 0;
+  }
+
+  #book-btn-today{
+    @include button-format();
   }
 
   .scroll-filter-by-type{

@@ -1,5 +1,4 @@
 import RoomService from './RoomService'
-import domUpdates from "./domUpdates"
 
 class RoomServiceRepo {
   constructor(roomServiceData, customer){
@@ -10,7 +9,6 @@ class RoomServiceRepo {
   orderRoomService(userID, date) {
     let roomService = new RoomService(userID, date, "Rustic Hey Sandwich", 5.97)
     this.roomServiceData.push(roomService)
-    // this.customer.roomServiceBalance += roomService.totalCost;
   }
 
   returnCustomerServiceOrdersForOneCustomer(customerID) {
@@ -20,10 +18,6 @@ class RoomServiceRepo {
   returnAllCustomerServiceOrdersForOneDate(orderDate) {
     return this.roomServiceData.filter(order => order.date === orderDate)
   }
-
-  // displayTotalRoomServiceDetailsPerDate(orderDate) {
-  //   domUpdates.displayGlobalRoomServiceDetailsPerDate(this.returnAllCustomerServiceOrdersForOneDate(orderDate))
-  // }
 
   returnTotalAmountSpentOnRoomServicePerDateForOneCustomer(userID, date) {
     let ordersPerDatePerCustomer = this.roomServiceData.filter(order => order.userID === userID && order.date === date)
