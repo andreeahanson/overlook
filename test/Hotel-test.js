@@ -149,11 +149,11 @@ describe('Hotel', function() {
     })
 
     it('should calculate the overal total balance per one date', function() {
-      expect(hotel.calculateOverallBalancePerDate("15/01/2020")).to.equal(357.65);
+      expect(hotel.calculateOverallBalancePerDate("15/01/2020")).to.equal("357.65");
     })
 
     it('should calculate the total bill for one customer for all services for all dates', function() {
-      expect(hotel.calculateATotalBillForOneCustomer(83)).to.equal(820.35);
+      expect(hotel.calculateATotalBillForOneCustomer(83)).to.equal("820.35");
     })
     
 });

@@ -1,13 +1,12 @@
 var chai = require('chai');
 var expect = chai.expect;
+
 import RoomServiceRepo from '../src/RoomServiceRepo';
 import Customer from '../src/Customer';
 
 import spies from 'chai-spies';
 chai.use(spies);
 
-// import domUpdates from '../src/domUpdates.js';
-// chai.spy.on(domUpdates, 'displayWords', () => true);
 
 const roomServiceSampleData = [
   {
@@ -65,7 +64,7 @@ describe('RoomServiceRepo', function() {
       expect(roomServiceRepo).to.be.an.instanceof(RoomServiceRepo);
     })
 
-    //MOVE TO CUSTOMER?????
+
     it('should be able to create a new room service order', function() {
       expect(roomServiceSampleData.length).to.equal(6);
       roomServiceRepo.orderRoomService(98, "19/07/2019");
@@ -76,7 +75,6 @@ describe('RoomServiceRepo', function() {
         food: "Rustic Hey Sandwich",
         totalCost: 5.97
         })
-      // expect(customer.roomServiceBalance).to.equal(5.97)
     })
 
     it('should show all orders of a customer', function() {

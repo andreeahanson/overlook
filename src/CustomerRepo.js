@@ -10,8 +10,6 @@ class CustomerRepo {
     addCustomer() {
         let customer = new Customer(7000, "Andreea Hanson");
         this.customerData.push(customer);
-        console.log("NEW", this.customerData.length)
-        domUpdates.displayNewName(customer.name)
     }
 
 
