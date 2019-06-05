@@ -1,8 +1,28 @@
 /* This is an example of using Sass, otherwise plain CSS works too*/
-$primary-background: pink;
+$primary-background: rgb(250, 250, 250);
+$table-color: orange;
 
 @mixin tab-guidelines($tab-height) {
   height: $tab-height;
+}
+
+@mixin input-format() {
+  height: 30px;
+  font-size: 15px;
+  width: 200px;
+  border-radius: 2%;
+  text-align: center;
+}
+
+@mixin button-format() {
+  height: 34px;
+  width: 200px;
+  padding: 7px;
+  font-size: 15px;
+  background-color: lightsalmon;
+  border: 2px solid rgb(247, 145, 104);
+  border-radius: 2%;
+  text-align: center;
 }
 
 body {
@@ -10,7 +30,7 @@ body {
 }
 
 .title {
-  color: red;
+  color: rgb(211, 99, 99);
 }
 
 h1 {
@@ -30,12 +50,13 @@ h2,
 section{
 			margin-top: 100px;
 			font-family: 'Trebuchet MS', serif;
-			line-height: 1
+      line-height: 1;
+      
 		}
 		.container{
       background-color: orange;
+      align-self: center;
       margin: 0;
-      width: 100%;
       @include tab-guidelines(80vh)
     }
 
@@ -66,145 +87,355 @@ section{
 
 		.tab-content.current{
 			display: inherit;
-		}
+    }
+    
+    .hidden {
+      display: none;
+    }
 
-.align-vertically {
-  background-color: gold;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-around;
+// TAB MAIN
+
+#tab-1{
+  h2 {
+    font-size: 18px;
+    border-radius: 2%;
+  }
+  li {
+    list-style: none;
+  }
+  
 }
 
-.align-horizontally {
-  background-color: gold;
-  display: flex;
-  flex-direction: row;
-  justify-content: space-around;
+
+// TAB ORDERS
+#tab-2{
+  h2 {
+    font-size: 18px;
+    border-radius: 2%;
+  }
+  li {
+    list-style: none;
+  }
+  .customer-service{
+    margin: 0;
+  }
+  .customer-service-form {
+    display: flex;
+    flex-direction: row;
+    .search-date-input-room-service{
+      @include input-format()
+    }
+    .btn{
+      @include button-format()
+    }
+  }
+
+//ROOM SERVICE TODAY'S ORDERS TABLE + CUSTOMER'S ORDERS TABLE
+    table {
+      margin-top: 30px;
+      width:100%;
+    }
+    table, th, td {
+      border: 1px solid black;
+      border-collapse: collapse;
+    }
+    th, td {
+      padding: 15px;
+      text-align: center;
+    }
+    table#t01 tr:nth-child(even), 
+    table#t02 tr:nth-child(even){
+      background-color: #eee;
+    }
+    table#t01 tr:nth-child(odd),
+    table#t02 tr:nth-child(odd){
+    background-color: #fff;
+    }
+    table#t01 th,
+    table#t02 th{
+      background-color: $table-color;
+      color: white;
+    }
+    .inpt{
+      @include input-format();
+    }
+    .btn{
+      @include button-format();
+    }
+
 }
 
-.customer-list-ul,
-ul {
-  padding: 0px;
+//TAB ROOM
+#tab-3{
+  h2 {
+    font-size: 18px;
+    border-radius: 2%;
+  }
+  li {
+    list-style: none;
+  }
+  .one-customers-bookings {
+    margin: 0;
+  }
+  .inpt{
+    @include input-format();
+  }
+  .upgrade-button,
+  .btn{
+    margin-right: 20px;
+    margin-bottom: 20px;
+    @include button-format();
+  }
+//TABLE FOR GENERAL AVAILABLE ROOMS BY DATE, AND SMALL TABLE FOR BEST AND WORST DATE
+  table {
+    width:100%;
+  }
+  table, th, td {
+    border: 1px solid black;
+    border-collapse: collapse;
+  }
+  th, td {
+    padding: 15px;
+    text-align: center;
+  }
+  table#t03 tr:nth-child(even),
+  table#t04 tr:nth-child(even),
+  table#t05 tr:nth-child(even),
+  table#t06 tr:nth-child(even),{
+    background-color: #eee;
+  }
+  table#t03 tr:nth-child(odd),
+  table#t04 tr:nth-child(odd),
+  table#t05 tr:nth-child(odd),
+  table#t06 tr:nth-child(odd){
+  background-color: #fff;
+  }
+  table#t03 th,
+  table#t04 th,
+  table#t05 th,
+  table#t06 th{
+    background-color: $table-color;
+    color: white;
+  }
+  table#t06 td{
+    padding: 5px;
+  }
+
+
+  .book-a-room-btn{
+    margin: 0px;
+    background: rgb(194, 166, 180);
+  }
+
+  .rooms-by-type{
+    margin: 0px;
+  }
+
+  .scroll{
+    max-height: 300px;
+    overflow-y: scroll;
+  }
+
+  #room-type-list{
+    @include input-format()
+    margin-top: 20px;
+  }
+
+  .customer-list-ul{
+    max-height: 90px;
+    overflow: scroll;
+    padding: 0;
+  }
+
+  .scroll-filter-by-type{
+    max-height: 100px;
+  }
+  
+  .order-room-service-btn {
+    margin-top: 20px;
+  }
+
+  .order-room-service,
+  .buy {
+    margin: 0px;
+  }
+
+  .buy-items{
+    max-height: 80px;
+  }
+
 }
 
-.customer-list,
-.room-number {
-  list-style: none;
-}
 
-//ROOM
-.create-booking-form {
-  display: flex;
-  background-color: red;
-  justify-content: space-around;
-  padding: 10px;
-}
 
-.room-booking-list {
-  list-style: none;
-}
 
-.room-booking-list-ul {
-  padding: 0px;
-}
 
-.room-booking-head {
-  justify-content: flex-start;
-}
 
-.room-booking-head h2 {
-  margin-left: 80px;  
-}
 
-.rooms-by-type {
-  background-color: blue; 
-}
 
-.availability {
-  background-color: aqua;
-  display: inline-flex;
-  justify-content: center;
-  width: 100%;
-}
 
-.availability-ul {
-  padding: 0;
-  width: 60%;
-  line-height: 0.3;
-  overflow: scroll;
-  max-height: 150px;
-  height: 150px;
-  margin-left: 20px;
-}
 
-.availability li {
-  font-size: 12px;
-}
 
-.availability-form {
-  align-self: center;
-  display: flex;
-  height: 40px;
-  justify-content: center;
-}
 
-.room-service-menu {
-  background-color: coral;
-  width: 200px;
-}
 
-.today-bookings, 
-.today-orders{
-  background-color: coral;
-}
 
-.hidden {
-  display: none;
-}
 
-.filter-today-rooms {
-  max-height: 150px;
-  overflow: scroll;
-  line-height: 0.1;
-  font-size: 13px;
-}
 
-.book-a-room-btn {
-  margin-top: 20px;
-}
 
-.booking-room-number,
-.booking-room-service-button {
-  margin-left: 40px;
-  margin-bottom: 10px;
-}
 
-.order-room-service {
-  background-color: aqua;
-}
 
-.menu {
-  text-align: center;
-}
 
-.item {
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-}
 
-.buy {
-  width: 180px;
-}
 
-.blue {
-  background-color: blue;
-}
 
-.red {
-  background-color: red;
-}
 
-.each-order {
-  justify-content: space-between
-}
+
+
+
+
+
+
+
+
+
+
+
+
+
+// .align-vertically {
+//   background-color: gold;
+//   display: flex;
+//   flex-direction: column;
+//   justify-content: space-around;
+// }
+
+// .align-horizontally {
+//   background-color: gold;
+//   display: flex;
+//   flex-direction: row;
+//   justify-content: space-around;
+// }
+
+// .customer-list-ul,
+// ul {
+//   padding: 0px;
+// }
+
+// .customer-list,
+// .room-number {
+//   list-style: none;
+// }
+
+// //ROOM
+// .create-booking-form {
+//   display: flex;
+//   background-color: red;
+//   justify-content: space-around;
+//   padding: 10px;
+// }
+
+// .room-booking-list {
+//   list-style: none;
+// }
+
+// .room-booking-list-ul {
+//   padding: 0px;
+// }
+
+// .room-booking-head {
+//   justify-content: flex-start;
+// }
+
+// .room-booking-head h2 {
+//   margin-left: 80px;  
+// }
+
+// .rooms-by-type {
+//   background-color: blue; 
+// }
+
+// .availability {
+//   background-color: aqua;
+//   display: inline-flex;
+//   justify-content: center;
+//   width: 100%;
+// }
+
+// .availability-ul {
+//   padding: 0;
+//   width: 60%;
+//   line-height: 0.3;
+//   overflow: scroll;
+//   max-height: 150px;
+//   height: 150px;
+//   margin-left: 20px;
+// }
+
+// .availability li {
+//   font-size: 12px;
+// }
+
+// .availability-form {
+//   align-self: center;
+//   display: flex;
+//   height: 40px;
+//   justify-content: center;
+// }
+
+// .room-service-menu {
+//   background-color: coral;
+//   width: 200px;
+// }
+
+// .today-bookings, 
+// .today-orders{
+//   background-color: coral;
+// }
+
+
+// .filter-today-rooms {
+//   max-height: 150px;
+//   overflow: scroll;
+//   line-height: 0.1;
+//   font-size: 13px;
+// }
+
+// .book-a-room-btn {
+//   margin-top: 20px;
+// }
+
+// .booking-room-number,
+// .booking-room-service-button {
+//   margin-left: 40px;
+//   margin-bottom: 10px;
+// }
+
+// .order-room-service {
+//   background-color: aqua;
+// }
+
+// .menu {
+//   text-align: center;
+// }
+
+// .item {
+//   display: flex;
+//   flex-direction: row;
+//   justify-content: center;
+// }
+
+// .buy {
+//   width: 180px;
+// }
+
+// .blue {
+//   background-color: blue;
+// }
+
+// .red {
+//   background-color: red;
+// }
+
+// .each-order {
+//   justify-content: space-between;
+// }
