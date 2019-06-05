@@ -1,4 +1,4 @@
-$primary-background: #b2c2bf;
+$primary-background: #c2bbb2;
 $table-color: orange;
 
 @mixin tab-guidelines($tab-height) {
@@ -87,14 +87,14 @@ section{
 		}
 
 		ul.tabs li.current{
-			background: #ededed;
+			background: #f7e7ca;
       color: #222;
       height:30px;
 		}
 
 		.tab-content{
 			display: none;
-			background: #ededed;
+			background: #f7e7ca;
       padding: 15px;
       @include tab-guidelines(80vh);
 		}
