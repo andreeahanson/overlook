@@ -29,11 +29,12 @@ npm start
 Then, go to http://localhost:8080/ in your browser to see the code running in the browser.
 
 ## Screenshots
-![alt text](https://github.com/andreeahanson/overlook/blob/master/images/Screen%20Shot%202019-06-05%20at%2004.51.30.png)
-![alt text](https://github.com/andreeahanson/overlook/blob/master/images/Screen%20Shot%202019-06-05%20at%2004.50.58.png)
-![alt text](https://github.com/andreeahanson/overlook/blob/master/images/Screen%20Shot%202019-06-05%20at%2004.50.39.png)
-![alt text](https://github.com/andreeahanson/overlook/blob/master/images/Screen%20Shot%202019-06-05%20at%2004.50.12.png)
 ![alt text](https://github.com/andreeahanson/overlook/blob/master/images/Screen%20Shot%202019-06-05%20at%2004.48.38.png)
+
+![alt text](https://github.com/andreeahanson/overlook/blob/master/images/Screen%20Shot%202019-06-05%20at%2004.50.12.png)
+
+![alt text](https://github.com/andreeahanson/overlook/blob/master/images/Screen%20Shot%202019-06-05%20at%2004.50.39.png)
+
 
 
 ## Learning Goals
