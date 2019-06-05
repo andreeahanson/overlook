@@ -16,12 +16,12 @@ class Hotel {
   }
 
   calculateOverallBalancePerDate(date) {
-    let overallHotelBalancePerDate = this.bookingRepo.showTotalBookingRevenueToday(date) + this.roomServiceRepo.returnTotalAmountSpentOnRoomServicePerDateForAllCustomers(date)
+    let overallHotelBalancePerDate = (this.bookingRepo.showTotalBookingRevenueToday(date) + this.roomServiceRepo.returnTotalAmountSpentOnRoomServicePerDateForAllCustomers(date)).toFixed(2)
     return overallHotelBalancePerDate;
   }
 
   calculateATotalBillForOneCustomer(customerID) {
-    let totalBill = this.bookingRepo.returnTotalBookingBalanceForOneCustomerAllDAys(customerID) + this.roomServiceRepo.returnTotalAmountSpentOnRoomServiceForOneCustomerAllDAys(customerID)
+    let totalBill = (this.bookingRepo.returnTotalBookingBalanceForOneCustomerAllDAys(customerID) + this.roomServiceRepo.returnTotalAmountSpentOnRoomServiceForOneCustomerAllDAys(customerID)).toFixed(2)
     return totalBill
 }
 
