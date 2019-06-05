@@ -188,13 +188,17 @@ displayAllRoomServiceOrdersByDate(allDates) {
 }, 
 
 displayOnMainTabAllRoomServiceOrdersByDate(allDates) {
-  $('.today-orders').html('')
+  // $('.today-orders').html('')
   allDates.forEach (date => {
-    $('.today-orders').append(`<li class="align-horizontally">
-      <p><span class="order-display">${date.date}</span></p> 
-      <p><span class="order-display">${date.food}</span></p> 
-      <p><span class="price-display">${date.totalCost}</span></p>
-    </li>`)  
+    $('.today-orders').append(`<tr><td>${date.date}</td><td>${date.food}</td><td>${date.totalCost}</td></tr>`)
+    
+    
+    
+    // (`<li class="align-horizontally">
+    //   <p><span class="order-display">${date.date}</span></p> 
+    //   <p><span class="order-display">${date.food}</span></p> 
+    //   <p><span class="price-display">${date.totalCost}</span></p>
+    // </li>`)  
   })
 },
 
