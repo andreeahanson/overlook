@@ -21,7 +21,7 @@ class Hotel {
   }
 
   calculateATotalBillForOneCustomer(customerID) {
-    let totalBill = (this.bookingRepo.returnTotalBookingBalanceForOneCustomerAllDAys(customerID) + this.roomServiceRepo.returnTotalAmountSpentOnRoomServiceForOneCustomerAllDAys(customerID)).toFixed(2)
+    let totalBill = (this.bookingRepo.returnTotalBookingBalanceForOneCustomerAllDAys(customerID) + this.roomServiceRepo.returnTotalAmountSpentOnRoomServiceForOneCustomerAllDAys(customerID)).toFixed(2) 
     return totalBill
 }
 

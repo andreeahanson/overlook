@@ -33,7 +33,6 @@ class RoomServiceRepo {
     }, 0)
   }
 
-  //WRITE TEST!!!!!!
   returnTotalAmountSpentOnRoomServiceForOneCustomerAllDAys(userID) {
     let ordersPerDatePerCustomer = this.roomServiceData.filter(order => order.userID === userID)
     return ordersPerDatePerCustomer.reduce((total, order) => {

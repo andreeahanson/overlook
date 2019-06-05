@@ -49,7 +49,7 @@ displayAllOnesCustomerBookings(allBookings) {
   $('.customer-list-ul').html('')
   $('.one-customers-bookings').removeClass('hidden')
   $('.individual-customers-bookings').html('Here are this customer\'s bookings')
-  allBookings.forEach(booking => $('.customer-list-ul').append(`<li class="customer-list customer-date ${booking.date} ${booking.roomNumber}">${booking.date} <span class="booking-room-number">Room: ${booking.roomNumber} </span><button class="upgrade-button ${booking.date} ${booking.roomNumber}">Upgrade Room</button></li>`))
+  allBookings.forEach(booking => $('.customer-list-ul').append(`<li class="customer-list customer-date ${booking.date} ${booking.roomNumber}"><button class="upgrade-button ${booking.date} ${booking.roomNumber}">Upgrade Room</button>${booking.date} <span class="booking-room-number">Room: ${booking.roomNumber} </span></li>`))
 },
 
 
@@ -76,14 +76,21 @@ displayAvailableRoomsByDate(rooms) {
     } else {
       room.bidet = "yes"
     }
-    $('.availability-ul').append(`<li class="align-horizontally">
-  <p><span class="room-number-display">${room.number}</span> 
-  <p><span class="room-type-display">${room.roomType}</span></p>
-  <p><span class="number-of-beds-display">${room.numBeds}</span></p> 
-  <p><span class="bed-size-display">${room.bedSize}</span></p>  
-  <p><span class="bidet-display">${room.bidet}</span></p> 
-  <p><span class="room-price-display">${room.costPerNight}</span>$</p>
-</li>`)  
+    $('.availability-ul').append(`<tr>
+    <td>${room.number}</td>
+    <td>${room.roomType}</td>
+    <td>${room.numBeds}</td>
+    <td>${room.bedSize}</td>
+    <td>${room.bidet}</td>
+    <td>${room.costPerNight}</td></tr>`)
+//     (`<li class="align-horizontally">
+//   <p><span class="room-number-display">${room.number}</span> 
+//   <p><span class="room-type-display">${room.roomType}</span></p>
+//   <p><span class="number-of-beds-display">${room.numBeds}</span></p> 
+//   <p><span class="bed-size-display">${room.bedSize}</span></p>  
+//   <p><span class="bidet-display">${room.bidet}</span></p> 
+//   <p><span class="room-price-display">${room.costPerNight}</span>$</p>
+// </li>`)  
 })
 },
 
@@ -95,15 +102,25 @@ filterAllRoomsByDateAndType(rooms) {
     } else {
       room.bidet = "yes"
     }
-    $('.filter-today-rooms').append(`<li class="align-horizontally">
-  <p><span class="room-number-display">${room.number}</span> 
-  <p><span class="room-type-display">${room.roomType}</span></p>
-  <p><span class="number-of-beds-display">${room.numBeds}</span></p> 
-  <p><span class="bed-size-display">${room.bedSize}</span></p>  
-  <p><span class="bidet-display">${room.bidet}</span></p> 
-  <p><span class="room-price-display">${room.costPerNight}</span>$</p>
-  <p><button id="book-btn-today">Book Room</button></p>
-</li>`)
+    $('.filter-today-rooms').append(`<tr>
+    <td>${room.number}</td>
+    <td>${room.roomType}</td>
+    <td>${room.numBeds}</td>
+    <td>${room.bedSize}</td>
+    <td>${room.bidet}</td>
+    <td>${room.costPerNight}</td>
+    <td><button id="book-btn-today" class="${room.number}">Book Room</button></td></tr>`)
+    
+    
+//     (`<li class="align-horizontally">
+//   <p><span class="room-number-display">${room.number}</span> 
+//   <p><span class="room-type-display">${room.roomType}</span></p>
+//   <p><span class="number-of-beds-display">${room.numBeds}</span></p> 
+//   <p><span class="bed-size-display">${room.bedSize}</span></p>  
+//   <p><span class="bidet-display">${room.bidet}</span></p> 
+//   <p><span class="room-price-display">${room.costPerNight}</span>$</p>
+//   <p><button id="book-btn-today">Book Room</button></p>
+// </li>`)
 })
 },
 
@@ -129,17 +146,20 @@ appendRemainingRoomsAfterFilter(rooms) {
 }, 
 
 showIndividualCustomersOrders(orders) {
-  $('.every-order-for-indivitual-customer').html('')
+  // $('.every-order-for-indivitual-customer').html('')
   $(".hotels-customer-service-message-per-date").addClass('hidden')
   $('.every-order-for-indivitual-customer').removeClass('hidden')
   $('.room-service-heads').removeClass('hidden')
-  $('.room-service-message').html('Here are this customer\'s orders')
+  $('.room-service-message').html('Here are this customer\'s room service orders')
   orders.forEach(order => {
-    $('.every-order-for-indivitual-customer').append(`<li class="align-horizontally">
-    <p><span class="order-date-display">${order.date}</span></p> 
-    <p><span class="order-food-display">${order.food}</span></p>
-    <p><span class="order-price-display">${order.totalCost}</span></p> 
-  </li>`)
+    $('.every-order-for-indivitual-customer').append(`<tr><td>${order.date}</td><td>${order.food}</td><td>${order.totalCost}</td></tr>`)
+    
+    
+  //   (`<li class="align-horizontally">
+  //   <p><span class="order-date-display">${order.date}</span></p> 
+  //   <p><span class="order-food-display">${order.food}</span></p>
+  //   <p><span class="order-price-display">${order.totalCost}</span></p> 
+  // </li>`)
   })
 }, 
 
@@ -152,14 +172,17 @@ displayNoCustomerServiceMessage() {
 
 
 displayAllRoomServiceOrdersByDate(allDates) {
-  $('.customer-service-ul').html('')
+  // $('.customer-service-ul').html('')
   $(".hotels-customer-service-message-per-date").html("Here are the orders for the current date")
   allDates.forEach (date => {
-    $('.customer-service-ul').append(`<li class="align-horizontally">
-      <p><span class="order-display">${date.date}</span></p> 
-      <p><span class="order-display">${date.food}</span></p> 
-      <p><span class="price-display">${date.totalCost}</span></p>
-    </li>`)  
+    $('.customer-service-ul').append(`<tr><td>${date.date}</td><td>${date.food}</td><td>${date.totalCost}</td></tr>`)
+    
+    
+    // (`<li class="align-horizontally">
+    //   <p><span class="order-display">${date.date}</span></p> 
+    //   <p><span class="order-display">${date.food}</span></p> 
+    //   <p><span class="price-display">${date.totalCost}</span></p>
+    // </li>`)  
   })
   $(".search-date-input-room-service").val('')
 }, 
@@ -177,7 +200,6 @@ displayOnMainTabAllRoomServiceOrdersByDate(allDates) {
 
 
 clearInputs() {
-  console.log("HIDE")
   $('.every-order-for-indivitual-customer').html('')
   $('.room-service-message').html('')
   $('.room-service-heads').addClass('hidden')
