@@ -292,7 +292,8 @@ section{
     padding: 0;
   }
 
-  #book-btn-today{
+  #book-btn-today,
+  .cancel-booking {
     @include button-format();
   }
 

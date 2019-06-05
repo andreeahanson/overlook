@@ -47,7 +47,7 @@ displayAllOnesCustomerBookings(allBookings) {
   $('.customer-list-ul').html('')
   $('.one-customers-bookings').removeClass('hidden')
   $('.individual-customers-bookings').html('Here are this customer\'s bookings')
-  allBookings.forEach(booking => $('.customer-list-ul').append(`<li class="customer-list customer-date ${booking.date} ${booking.roomNumber}"><button class="upgrade-button ${booking.date} ${booking.roomNumber}">Upgrade Room</button>${booking.date} <span class="booking-room-number">Room: ${booking.roomNumber} </span></li>`))
+  allBookings.forEach(booking => $('.customer-list-ul').append(`<li class="customer-list customer-date ${booking.date} ${booking.roomNumber}"><button class="cancel-booking ${booking.date} ${booking.roomNumber}">Cancel Booking</button><button class="upgrade-button ${booking.date} ${booking.roomNumber}">Upgrade Room</button>${booking.date} <span class="booking-room-number">Room: ${booking.roomNumber} </span></li>`))
 },
 
 
